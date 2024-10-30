@@ -1,0 +1,20 @@
+<section class="page-template">
+  <div class="container">
+    <div class="row">
+      <div class="result-card">
+        <a href ui-sref="home({inv_id:home.uniqueName})" class="result" ng-repeat="home in homes">
+          <div class="result-media"> <img ng-src="{{home.photos[0].contentUrl|thumbnail:640:400:true}}" /> </div>
+          <div class="result-content">
+            <h4>{{home.address.streetAddress}}<span>{{home.address.addressLocality}}, {{home.address.addressRegion}}, {{home.address.postalCode}}</span></h4>
+            <ul class="list-unstyled">
+              <li><i class="fa fa-bed" aria-hidden="true"></i> {{home.beds}}</li>
+              <li><i class="fa fa-bath" aria-hidden="true"></i> {{home.bathsFull}}</li>
+              <li><i class="fa fa-columns" aria-hidden="true"></i> {{home.sqft|number}}</li>
+            </ul>
+          </div>
+          <div class="result-cta">${{home.price|number:0}} <i class="fa fa-heart-o favs" aria-hidden="true"></i></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,70 @@
+<div ng-cloak ng-controller="CommonController">
+  <div ng-if="community">
+    <h3>{{community.name}} {{community.status}} <span style="float:right;">{{community.phone}}</span></h3>
+    <h4 ng-if="community.headline">{{community.headline}}</h4>
+    <h4>{{community.address.streetAddress}}, {{community.address.addressLocality}}, {{community.address.addressRegion}} {{community.address.postalCode}}</h4>
+    <img ng-init="community.thePhoto = community.photos[0]" style="width:100%;" ng-src="{{community.thePhoto.contentUrl|thumbnail}}">
+    <div ng-if="community.photos.length > 1">
+      <a ng-repeat="photo in community.photos" href ng-click="community.thePhoto = photo">
+        <img ng-src="{{photo.contentUrl|thumbnail:240:180:true}}">
+      </a>
+    </div>
+    <h4><pills item="community"></pills></h4>
+    <p>
+      <img class="alignleft" ng-src="{{community.logo.contentUrl|thumbnail:150}}">
+      {{community.description}}
+    </p>
+
+    <bd-map id="schools" style="height:400px;" marker="community" marker-icon="map_pin_green.png" markers="community.schools" markers-icon="school.png" popup-template="schoolPopup.html"></bd-map>
+    <script type="text/ng-template" id="schoolPopup.html">
+      <div style="line-height:2;">
+        <span>{{name}}</span> <span style="float:right;">{{gsRating}}/10 - Stars</span><br>
+        <span>{{address}}</span><br>
+        <span>{{phone}}</span> <span style="float:right;"><a href="{{overviewLink}}" target="_blank">Link</a></span>
+      </div>
+    </script>
+
+    <div ng-if="community.plans.length">
+      <h3>Plans available in {{community.name}}</h3>
+      <section class="cards">
+        <div class="card" ng-repeat="plan in community.plans | orderBy:'name'">
+          <a href="{{BUILDERCLOUD.plans}}?id={{plan.uniqueName}}">
+            <div class="thumbnail">
+              <img ng-if="plan.elevationPhotos[0].contentUrl" ng-src="{{plan.elevationPhotos[0].contentUrl|thumbnail:236:176:true}}" alt="">
+              <img ng-if="!plan.elevationPhotos[0].contentUrl" ng-src="{{plan.photos[0].contentUrl|thumbnail:236:176:true}}" alt="">
+            </div>
+            <div class="card-content">
+              <h2>{{plan.name}}</h2>
+              <pills item="plan"></pills>
+            </div>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <div ng-if="community.homes.length">
+      <h3>Homes available in {{community.name}}</h3>
+      <section class="cards">
+        <div class="card" ng-repeat="home in community.homes">
+          <a href="{{BUILDERCLOUD.homes}}?id={{home.uniqueName}}">
+            <div class="thumbnail">
+              <img ng-src="{{home.photos[0].contentUrl|thumbnail:236:176:true}}" alt="">
+            </div>
+            <div class="card-content">
+              <h2>{{home.address.streetAddress}}</h2>
+              <pills item="home"></pills>
+              <p>{{home.description|characters:400}}</p>
+            </div>
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div ng-if="!ready" ng-include="BUILDERCLOUD.PURL + '/templates/loading.html'"></div>
+
+  <div ng-if="ready && !community">
+    Community Not Found
+  </div>
+
+</div>

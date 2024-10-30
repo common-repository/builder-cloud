@@ -1,0 +1,52 @@
+<div ng-cloak ng-controller="CommonController">
+
+  <div class="filters">
+    <div class="filter">
+      <label>Beds</label>
+      <select ng-model="homes.beds">
+        <option value="">(select)</option>
+        <option ng-repeat="home in homes | unique:'beds' | orderBy:'beds'">{{home.beds}}</option>
+      </select>
+    </div>
+    <div class="filter">
+      <label>Baths</label>
+      <select ng-model="homes.bathsFull">
+        <option value="">(select)</option>
+        <option ng-repeat="home in homes | unique:'bathsFull' | orderBy:'bathsFull'">{{home.bathsFull}}</option>
+      </select>
+    </div>
+    <div class="filter">
+      <label>Sort</label>
+      <select ng-model="homes.order">
+        <option value="address.order">Address</option>
+        <option value="price">Price (Low to High)</option>
+        <option value="-price">Price (High to Low)</option>
+      </select>
+    </div>
+    <div class="filter">
+      <label>Page</label>
+      <dir-pagination-controls></dir-pagination-controls>
+    </div>
+  </div>
+
+  <section class="cards">
+    <div class="card" dir-paginate="home in homes | filterBy:['beds']:homes.beds | filterBy:['bathsFull']:homes.bathsFull | orderBy:homes.order | itemsPerPage:12">
+      <a href="?id={{home.uniqueName}}">
+        <div class="thumbnail">
+          <img ng-src="{{home.photos[0].contentUrl|thumbnail:240:180:true}}" alt="">
+        </div>
+        <div class="card-content">
+          <h2>{{home.address.streetAddress}}</h2>
+          <pills item="home"></pills>
+          <p>{{home.description|characters:400}}</p>
+        </div>
+      </a>
+    </div>
+
+    <div ng-if="!ready" ng-include="BUILDERCLOUD.PURL + '/templates/loading.html'"></div>
+
+  </section>
+
+  <dir-pagination-controls></dir-pagination-controls>
+
+</div>

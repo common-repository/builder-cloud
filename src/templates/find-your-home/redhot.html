@@ -1,0 +1,25 @@
+<div class="bd-results-filters">
+  <ul class="navbar-collapse list-unstyled">
+    <li uib-dropdown class="filter-label"> Filter by
+      <a ng-if="!websiteService.redHotFilter.state" href uib-dropdown-toggle class="filter-select">Location</a>
+      <a ng-if="websiteService.redHotFilter.state" href uib-dropdown-toggle class="filter-select">{{websiteService.redHotFilter.state}}</a>
+      <ul uib-dropdown-menu>
+        <li class="location-jump-header"> <a href ng-click="websiteService.redHotFilter.state = ''">All</a> </li>
+        <li class="location-jump-header"> <a href ng-click="websiteService.redHotFilter.state = 'Louisiana'">Louisiana</a> </li>
+        <li class="location-jump-header"> <a href ng-click="websiteService.redHotFilter.state = 'Mississippi'">Mississippi</a> </li>
+        <li class="location-jump-header"> <a href ng-click="websiteService.redHotFilter.state = 'Alabama'">Alabama</a> </li>
+        <li class="location-jump-header"> <a href ng-click="websiteService.redHotFilter.state = 'Florida'">Florida</a> </li>
+      </ul>
+    </li>
+    <li class="hidden-sm hidden-xs">
+      <a ng-class="{'active':!websiteService.mapVisible}" href ng-click="websiteService.mapVisible = false" class="btn">
+        <i class="fa fa-th" aria-hidden="true"></i> grid view
+      </a>
+      <a ng-class="{'active':websiteService.mapVisible}" href ng-click="websiteService.mapVisible = true" class="btn">
+        <i class="fa fa-map-o" aria-hidden="true"></i> map view
+      </a>
+    </li>
+  </ul>
+</div>
+<ng-include ng-if="websiteService.mapVisible" src="'/templates/find-your-home/homes-map.html'"></ng-include>
+<ng-include ng-if="!websiteService.mapVisible" src="'/templates/find-your-home/homes-list.html'"></ng-include>

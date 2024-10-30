@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <h3 ng-if="!agt.email">Request Info</h3>
+  <h3 ng-if="agt.email">Request Info: ({{agt.email}})</h3>
+</div>
+<div class="modal-body">
+  <div class="styled-contact-form">
+    <form name="contactForm" ng-controller="ContactController" ng-submit="post($event)">
+      <div ng-show="!submitted" ng-class="{'disabled':disabled}">
+        <div class="form-group"> <label class="required">First Name: </label> <input class="form-control" name="firstName" ng-model="data.firstName" placeholder="" required minlength="3" maxlength="50">
+          <div ng-if="contactForm.firstName.$error.minlength">Name must be at least three characters long.</div>
+          <div ng-if="contactForm.firstName.$error.maxlength">Name can not be over 50 characters long.</div>
+        </div>
+        <div class="form-group"> <label class="required">Last Name: </label> <input class="form-control" name="lastName" ng-model="data.lastName" placeholder="" required minlength="3" maxlength="50">
+          <div ng-if="contactForm.lastName.$error.minlength">Name must be at least three characters long.</div>
+          <div ng-if="contactForm.lastName.$error.maxlength">Name can not be over 50 characters long.</div>
+        </div>
+        <div class="form-group"> <label class="required">Email Address: </label>
+          <input class="form-control" name="email" type="email" ng-model="data.email" placeholder="" required>
+          <div ng-if="contactForm.email.$error.email">Must be a valid email address.</div>
+        </div>
+        <div class="form-group"> <label class="required">Phone: </label> <input class="form-control" name="phone" ng-model="data.phone" placeholder="" required> </div>
+        <div class="form-group blockit"> <label class="required">Comments: </label> <textarea class="form-control" name="comments" ng-model="data.comments" placeholder="" required></textarea> </div>
+        <div class="form-group blockit" style="margin-left:0;"> <button ng-disabled="contactForm.$invalid || disabled" class="btn" type="submit">Submit</button> </div>
+      </div>
+      <div ng-show="submitted" class="submit-message">
+        <h3>Thank You!</h3>
+        <p>Thank you! <a href ng-click="submitted=false;">Click here</a> to send us another inquiry!</p>
+      </div>
+    </div>
+  </form>
+</div>
+</div>

@@ -1,0 +1,53 @@
+<div class="modal-header">
+	<h3 class="modal-title">My Favorites</h3> </div>
+<div class="modal-body">
+	<div class="favorite-group" ng-repeat="(key, value) in favorites.data | groupBy: 'type'">
+		<ul class="list-unstyled favorites">
+			<h3 class="fav-type-title">{{key}}</h3>
+			<li class="fav_dashboard_item result" ng-repeat="fav in value track by $index">
+				<div class="result-media"> <img ng-if="fav.image" ng-src="{{fav.image|thumbnail:234:143:true}}" /> <img ng-if="!fav.image" ng-src="/common/images/no_image_mod.jpg" /> </div>
+				<div class="result-content">
+					<h4 class="result-title">{{fav.title}}</h4>
+					<ul>
+						<li ng-if="fav.li">{{fav.li}}</li>
+						<li ng-if="fav.lii">{{fav.lii}}</li>
+						<li ng-if="fav.liii">{{fav.liii}}</li>
+					</ul>
+					<div class="result-col-btn"> <a class="btn" ng-href="{{fav.url}}" ng-click="close()">View Detail</a> <a class="btn" ng-click="favorites.remove(fav)">Remove</a> </div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div ng-if="!favorites.isLoggedIn()" class="favorites-user">
+		<div class="styled-contact-form">
+			<h5>Login:</h5>
+			<form ng-submit="favorites.login()">
+				<div class="form-group"><label class="required">Email Address: </label> <input ng-model="favorites.login.email" name="email" type="email" class="form-control" placeholder="Email Address" /> </div>
+				<div class="form-group"><label class="required">Password: </label> <input ng-model="favorites.login.password" name="password" type="password" class="form-control" placeholder="Password" /> </div>
+				<div class=""><button type="submit" name="submit" class="btn" value="Log In">Login</button> </div>
+			</form>
+			<p ng-if="favorites.passwordFail" style="font-size:12px;color:red;"> Password Incorrect </p>
+		</div>
+		<div class="styled-contact-form">
+			<h5>Or Register:</h5>
+			<form ng-submit="favorites.register()">
+				<div class="form-group"><label class="required">Email Address: </label><input ng-model=" favorites.register.email" name="email" type="email" class="form-control" placeholder="Email Address" /></div>
+				<div class="form-group"><label class="required">Password: </label> <input ng-model="favorites.register.password" name="password" type="password" class="form-control" placeholder="Password" /> </div>
+				<div class="form-group"><label class="required">Password Confirm: </label> <input ng-model="favorites.register.password2" name="password2" type="password" class="form-control" placeholder="Confirm Password" /> </div>
+				<div class=""><button type="submit" name="submit" class="btn" value="Register">Register</button> </div>
+			</form>
+		</div>
+	</div>
+	<div class="login-hide" ng-if="favorites.isLoggedIn()">
+		<div>
+			<h4>Favorites for {{favorites.isLoggedIn().email}}</h4>
+			<div ng-if="!favorites.data.length">
+				<p>You have not yet selected any favorites.</p>
+			</div>
+			<div style="float: left; margin-right: 15px;"> <a ng-click="favorites.logout()" class="btn">Log Out</a> </div>
+		</div>
+	</div>
+	<div ng-if="favorites.data.length" style="margin: 15px 0; float:left;width:100%;">
+		<a ng-click="favorites.wipe()" style="cursor: pointer"> <span class="glyphicon glyphicon-refresh"></span> Reset Favorites</a>
+	</div>
+</div>

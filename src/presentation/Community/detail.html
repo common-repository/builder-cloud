@@ -1,0 +1,200 @@
+<section class="detail-header">
+  <div class="container">
+    <div class="row">
+      <div class="detail-header-media">
+        <div uib-carousel active="carouselactiveslide" interval="5000" template-url="/presentation/Carousel/ry.html">
+          <div uib-slide ng-repeat="slide in community.photos track by $index" index="$index">
+            <img ng-src="{{slide.contentUrl|thumbnail:640:400:true}}" -->
+          </div>
+        </div>
+        <lightbox photos="[community.logo, community.photos]" template="counterone"></lightbox>
+      </div>
+      <div class="detail-header-content">
+          <h1 ng-bind-html="seo.h1"></h1>
+          <div class="fav-wrap">
+            <favorite sref="['community', {com_id: $stateParams.com_id}]" type="Community" title="{{community.name}}" li="{{community.address.addressLocality}}," lii=" {{community.address.addressRegion}}" image="{{community.photos[0].contentUrl}}"></favorite>
+          </div>
+          <h3 ng-if="!community.headline">{{community.address.streetAddress}} {{community.address.addressLocality}}, {{community.address.addressRegion}} {{community.address.postalCode}}</h3>
+          <h3 ng-if="community.headline">{{community.headline}}</h3>
+          <ul class="list-styled">
+            <li><strong>Price Range:</strong> ${{community.priceLow|human}}
+              <ngif ng-if="community.priceHigh"> - ${{community.priceHigh|human}}</ngif>
+            </li>
+            <li><strong>SQFT Range:</strong> {{community.sqftLow|number}} - {{community.sqftHigh|number}}</li>
+            <li><strong>Status:</strong> <span class="status">{{community.status}}</span></li>
+            <li ng-if="community.status_headline" class="status">{{community.status_headline}}</li>
+          </ul>
+          <div class="agents-wrapper">
+            <ul ng-repeat="agt in community.agents track by $index" class="list-unstyled">
+              <li ng-if="!agt.mortgage_loan_originator && !agt.senior_mortgage_loan_originator && !agt.sales_agent">
+                <strong class="blockit">Builder Sales Representative:</strong> {{agt.name}}</li>
+              <li ng-if="agt.sales_agent"><strong class="blockit">Sales Agent:</strong> {{agt.name}}</li>
+              <li ng-if="agt.mortgage_loan_originator"><strong class="blockit">Mortgage Loan Originator:</strong> {{agt.name}}</li>
+              <li ng-if="agt.senior_mortgage_loan_originator"><strong class="blockit">Sr. Mortgage Loan Originator:</strong> {{agt.name}}</li>
+              <li ng-if="agt.telephone"><i class="fa fa-mobile" aria-hidden="true"></i><a ng-href="tel:{{agt.telephone}}"> {{agt.telephone}}</a></li>
+              <li ng-if="agt.email"><a modal template="/presentation/Forms/contact.html"><i class="fa fa-envelope" aria-hidden="true"></i> Email</a></li>
+            </ul>
+          </div>
+          <div class="cta-btn-set">
+            <ul class="list-unstyled">
+              <li><a href="{{community.plans_and_features_pdf.contentUrl}}" class="btn" target="_blank">prices &amp; features PDF</a></li>
+              <li><a href="#" modal template="/presentation/Forms/contact.html" class="btn">Request Info</a></li>
+            </ul>
+          </div>
+          <!--<div class="detail-next">
+            <div style="clear:both;" ng-repeat="com in communities | filter:sameArea | orderBy:'name'" class="detail-next-btn-wrap">
+              <div ng-if="community.currentComIndex == $index + 1"><a href ui-sref="community({com_id:com.uniqueName})" class="btn"><strong><i class="fa fa-arrow-left" aria-hidden="true"></i> Previous Community</strong></a> </div>
+              <div ng-if="com._id == community._id" ng-init="community.currentComIndex = $index">
+                current, comment this line out if you use this feature.
+              </div>
+              <div ng-if="community.currentComIndex == ($index - 1)"><a href ui-sref="community({com_id:com.uniqueName})" class="btn"><strong>Next Community <i class="fa fa-arrow-right" aria-hidden="true"></i></strong></a> </div>
+            </div>
+          </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+<section class="detail-content">
+  <div class="container">
+    <div class="row">
+      <div class="detail-main-content">
+        <div ng-bind-html="community.description|nl2br"></div>
+        <div class="detail-video">
+          <ul class="list-unstyled">
+            <li ng-repeat="video in community.videoEmbeds">
+              <div ng-bind-html="video" class="videoWrapper"> </div>
+            </li>
+          </ul>
+        </div>
+        <div ng-if="community.directions" class="directions">
+          <h5>Driving Directions</h5>
+          <div ng-bind-html="community.directions|nl2br"></div>
+        </div>
+      </div>
+      <div class="detail-sidebar-content">
+        <div class="schools">
+          <h5 class="detail-sidebar-header">School Info</h5>
+          <ul class="list-unstyled">
+            <li ng-repeat="(district, schools) in community.schools | groupBy:'district'">
+              <h3>{{district}}</h3>
+              <ul class="list-styled">
+                <li ng-repeat="school in schools"><a target="_blank" href="{{school.overviewLink}}">
+                    {{school.name}} <!--<span class="stars-box"><span class="stars stars-{{school.gsRating}}"></span></span>-->
+                  </a></li>
+              </ul>
+            </li>
+            <li>
+              <ul class="list-styled">
+                <li ng-repeat="aSchool in community.additional_schools"> <a href="{{aSchool.link}}" target="_blank">{{aSchool.name}}</a> </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <!--<div ng-if="community.sitePlan" class="detail-siteplan">
+          <h5 class="detail-sidebar-header">Community Map</h5>
+          <lightbox photos="[community.sitePlan]">
+            <img ng-src="{{community.sitePlan.contentUrl}}" />
+          </lightbox>
+
+        </div>-->
+
+        <div ng-if="community.sitePlan" class="detail-siteplan">
+          <h5 class="detail-sidebar-header">Community Map</h5>
+          <a ng-href="{{community.sitePlan.contentUrl}}" target="_blank">
+            <img ng-src="{{community.sitePlan.contentUrl}}" />
+          </a>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</section>
+<section ng-if="community.plans.length >= 1" class="community-plans">
+  <h4 class="detail-section-headline">floor plans</h4>
+  <div class="result-card">
+    <div uib-carousel class="three-by-carousel" active="plancarouselactiveslide" interval="5000000" template-url="/presentation/Carousel/ry.html">
+      <div uib-slide ng-repeat="i in (_.range(0, community.plans.length, innerWidth<767?rowlength=1:innerWidth<991?rowlength=2:3))" index="$index">
+        <a href class="result slide" ng-repeat="mod in community.plans | orderBy:'price' | limitTo:innerWidth<767?rowlength=1:innerWidth<991?rowlength=2:3:i" ui-sref="plan({com_id: $stateParams.com_id, plan_id: mod.uniqueName})" target="_blank">
+          <div class="result-media"> <img ng-src="{{mod.photos[0].contentUrl|thumbnail:640:400:true}}" /> </div>
+          <div class="result-content">
+            <h4>{{mod.name}}</h4>
+            <ul class="list-unstyled">
+              <li ng-if="mod.beds"><i class="fa fa-bed" aria-hidden="true"></i> {{mod.beds}}</li>
+              <li ng-if="mod.baths"><i class="fa fa-bath" aria-hidden="true"></i> {{mod.baths}}</li>
+              <li ng-if="mod.sqft"><i class="fa fa-columns" aria-hidden="true"></i> {{mod.sqft|number}}</li>
+            </ul>
+          </div>
+          <div class="result-cta"> BASE PRICE: ${{mod.price|number:0}}
+            <favorite sref="['plan', {com_id: $stateParams.com_id, plan_id: mod.uniqueName}]" type="Plan" title="{{mod.name}}" lii="Beds: {{mod.beds}}" liii="Baths: {{mod.baths}}" image="{{mod.photos[0].contentUrl}}"></favorite>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<section ng-if="community.homes.length >= 1" class="community-homes">
+  <h4 class="detail-section-headline">quick move-in homes</h4>
+  <div class="result-card">
+    <div uib-carousel class="three-by-carousel" active="homecarouselactiveslide" interval="5000000" template-url="/presentation/Carousel/template.html">
+      <div uib-slide ng-repeat="i in (_.range(0, community.homes.length, innerWidth<767?rowlength=1:innerWidth<991?rowlength=2:3))" index="$index">
+        <a href class="result" ng-repeat="inv in community.homes | orderBy:'address.streetAddress' | limitTo:innerWidth<767?rowlength=1:innerWidth<991?rowlength=2:3:i" ui-sref="home({inv_id: inv.uniqueName})" target="_blank">
+          <div class="result-media"> <img ng-src="{{inv.photos[0].contentUrl|thumbnail:640:400:true}}" />
+            <div class="overlay-status" ng-if="inv.status == 'Sold'"><img ng-src="/images/sold.png" width="67" height="66" /></div>
+          </div>
+          <div class="result-content">
+            <h4>{{inv.address.streetAddress}}<span>{{inv.address.addressLocality}}, {{inv.address.addressRegion}}, {{inv.address.postalCode}}</span>
+              <span><strong>Plan Name:</strong> {{getPlan(inv.plan).name}}</span>
+            </h4>
+            <ul class="list-unstyled">
+              <li><i class="fa fa-bed" aria-hidden="true"></i> {{inv.beds}}</li>
+              <li><i class="fa fa-bath" aria-hidden="true"></i> {{inv.baths}}</li>
+              <li><i class="fa fa-columns" aria-hidden="true"></i> {{inv.sqft|number}}</li>
+            </ul>
+          </div>
+          <div class="result-cta"> ${{inv.price|number:0}}
+            <favorite sref="['home', {inv_id: inv.uniqueName}]" type="Home" title="{{inv.address.streetAddress}}" li="${{inv.price|number}}" lii="Beds: {{inv.beds}}" liii="Baths: {{inv.baths}}" image="{{inv.photos[0].contentUrl}}"></favorite>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="detail-directions">
+  <div class="container">
+    <div class="row">
+      <div class="detail-directions-wrapper">
+        <div class="detail-directions-content">
+          <div class="detail-directions-content-heading"> <i class="fa fa-mobile" aria-hidden="true"></i>
+            <h3 style="width:calc(100% - 80px);">Your new home is waiting for you!</h3> </div>
+          <ul ng-repeat="agt in community.agents track by $index" class="list-unstyled">
+            <li ng-if="!agt.mortgage_loan_originator && !agt.senior_mortgage_loan_originator && !agt.sales_agent"><strong class="blockit">Builder Sales Representative:</strong> {{agt.name}}</li>
+            <li ng-if="agt.sales_agent"><strong class="blockit">Sales Agent:</strong> {{agt.name}}</li>
+            <li ng-if="agt.mortgage_loan_originator"><strong class="blockit">Mortgage Loan Originator:</strong> {{agt.name}}</li>
+            <li ng-if="agt.senior_mortgage_loan_originator"><strong class="blockit">Sr. Mortgage Loan Originator:</strong> {{agt.name}}</li>
+            <li ng-if="agt.telephone"><a ng-href="tel:{{agt.telephone}}"><i class="fa fa-mobile" aria-hidden="true"></i> {{agt.telephone}}</a></li>
+            <li ng-if="agt.email"><a modal template="/presentation/Forms/contact.html"><i class="fa fa-envelope" aria-hidden="true"></i> Email</a></li>
+          </ul>
+          <ul ng-repeat="management in community.property_management" class="list-unstyled">
+            <li><strong class="blockit">Property Managed by:</strong></li>
+            <li><a ng-href="{{management.website_link}}" target="_blank">{{management.company_name}}</a></li>
+          </ul> <a href="#" modal template="/presentation/Forms/contact.html" class="btn btn-lg btn-green">Request Info</a> </div>
+        <div class="detail-directions-media">
+          <div class="directions-map">
+            <bd-map id="communityDetailMap" style="display:block; width:100%; height:400px; color:#333;" markers="community" max-zoom="14" marker-icon="/images/map-markers/map-pin-green.png" marker-width="31" marker-height="46" popup-template="communityDetailPopup.html">
+            </bd-map>
+            <!-- If the popup template is an <a href=""></a> tag with no contents the marker itself becomes the link -->
+            <script type="text/ng-template" id="communityDetailPopup.html">
+              <a target="_blank" href="http://maps.google.com/?q={{geoIndexed[1]}},{{geoIndexed[0]}}"></a>
+            </script>
+          </div>
+          <p class="address">{{community.address.streetAddress}} {{community.address.addressLocality}}, {{community.address.addressRegion}} {{community.address.postalCode}}</p>
+          <p ng-if="!community.hours" class="hours"> <strong>Model Home Hours:</strong> <span ng-bind-html="builder.default_hours|nl2br"></span> </p>
+          <p ng-if="community.hours" class="hours"> <strong>Model Home Hours:</strong> <span ng-bind-html="community.hours|nl2br"></span> </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

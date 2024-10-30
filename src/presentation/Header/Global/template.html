@@ -1,0 +1,73 @@
+<section class="global-nav" ng-init="CommonController.showMobileDrop = false">
+  <ul class="list-unstyled top-nav hidden-xs hidden-sm">
+    <li class="drop-menu" uib-dropdown>
+      <a href id="fat-dropdown" uib-dropdown-toggle>LIVING AT STONE CANYON</a>
+      <ul class="fat-drops" uib-dropdown-menu aria-labelledby="fat-dropdown">
+        <li id="avail" ng-style="{'background-image':'url('+$filter('thumbnail')(pages.homepage.fat_drop_down_menu[0].background_image.contentUrl,450,350)+')'}">
+          <div class="olay"></div><a href ui-sref="">AVAILABLE HOMES</a>
+        </li>
+        <li id="neigh" ng-style="{'background-image':'url('+$filter('thumbnail')(pages.homepage.fat_drop_down_menu[1].background_image.contentUrl,450,350)+')'}">
+          <div class="olay"></div><a href ui-sref="">NEIGHBORHOODS</a>
+        </li>
+        <li id="builder" ng-style="{'background-image':'url('+$filter('thumbnail')(pages.homepage.fat_drop_down_menu[2].background_image.contentUrl,450,350)+')'}">
+          <div class="olay"></div><a href ui-sref="">OUR BUILDERS</a>
+        </li>
+        <li id="lots" ng-style="{'background-image':'url('+$filter('thumbnail')(pages.homepage.fat_drop_down_menu[3].background_image.contentUrl,450,350)+')'}">
+          <div class="olay"></div><a href ui-sref="">LOTS</a>
+        </li>
+      </ul>
+    </li>
+    <li ng-class="{'active':$state.current.name === 'about'}"><a href ui-sref="about">THE VISION</a></li>
+    <li class="logo"><a href ui-sref="index"><img ng-src="{{builder.logo.contentUrl}}" alt="stone_canyon_logo"></a></li>
+    <li ng-class="{'active':$state.current.name === 'plans'}"><a href ui-sref="plans">PHOTOS &amp; VIDEOS</a></li>
+    <li ng-class="{'active':$state.current.name === 'contact'}"><a href ui-sref="contact">CONTACT US</a></li>
+  </ul>
+  <ul class="mobile-top-nav list-unstyled hidden-md hidden-lg">
+    <li class="logo"><a href ui-sref="index"><img ng-src="{{builder.logo.contentUrl}}" alt="stone_canyon_logo"></a></li>
+    <li ng-click="CommonController.showMobileDrop = !CommonController.showMobileDrop" class="hamburger"><img src="/images/hamburger.svg" alt="hamburger"></li>
+  </ul>
+</section>
+<section class="mobile-drop-menu hidden-md hidden-lg" ng-show="CommonController.showMobileDrop">
+  <div class="drop-menu-wrapper">
+    <ul class="list-unstyled drop-links">
+      <li uib-dropdown>
+        <a href id="livingddl" uib-dropdown-toggle>LIVING AT STONE CANYON<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+        <ul class="list-unstyled dropdown-menu" uib-dropdown-menu aria-labelledby="livingddl">
+          <li><a ui-sref="about" ng-click="CommonController.showMobileDrop = false">NEIGHBORHOODS</a></li>
+          <li><a ui-sref="communities" ng-click="CommonController.showMobileDrop = false">AVAILABLE HOMES</a></li>
+          <li><a ui-sref="homes" ng-click="CommonController.showMobileDrop = false">OUR BUILDERS</a></li>
+          <li><a ui-sref="contact" ng-click="CommonController.showMobileDrop = false">THE LOTS</a></li>
+        </ul>
+      </li>
+      <li uib-dropdown>
+        <a href id="visionddl" uib-dropdown-toggle>THE VISION<i class="fa fa-angle-down" aria-hidden="true"></i><a/>
+        <ul class="list-unstyled dropdown-menu" uib-dropdown-menu aria-labelledby="visionddl">
+          <li><a ui-sref="about" ng-click="CommonController.showMobileDrop = false">OUR BUILD PROCESS</a></li>
+          <li><a ui-sref="communities" ng-click="CommonController.showMobileDrop = false">AVAILABLE HOMES</a></li>
+          <li><a ui-sref="homes" ng-click="CommonController.showMobileDrop = false">OUR BUILDERS</a></li>
+          <li><a ui-sref="contact" ng-click="CommonController.showMobileDrop = false">THE LOTS</a></li>
+        </ul>
+      </li>
+      <li uib-dropdown>
+        <a href id="mediaddl" uib-dropdown-toggle>PHOTOS &amp; VIDEOS<i class="fa fa-angle-down" aria-hidden="true"></i><a/>
+        <ul class="list-unstyled dropdown-menu" uib-dropdown-menu aria-labelledby="mediaddl">
+          <li><a ui-sref="about" ng-click="CommonController.showMobileDrop = false">PHOTO GALLERY</a></li>
+          <li><a ui-sref="communities" ng-click="CommonController.showMobileDrop = false">VIDEO GALLERY</a></li>
+        </ul>
+      </li>
+      <li uib-dropdown>
+        <a href id="contactddl" uib-dropdown-toggle>CONTACT US<i class="fa fa-angle-down" aria-hidden="true"></i><a/>
+        <ul class="list-unstyled dropdown-menu" uib-dropdown-menu aria-labelledby="contactddl">
+          <li><a ui-sref="about" ng-click="CommonController.showMobileDrop = false">REALTOR LOGIN</a></li>
+          <li><a ui-sref="communities" ng-click="CommonController.showMobileDrop = false">HOMEBUYER LOGIN</a></li>
+          <li><a ui-sref="homes" ng-click="CommonController.showMobileDrop = false">WARRANTY REQUEST</a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="list-unstyled static-links">
+      <li><a href ui-sref="">HOME</a></li>
+      <li><a href ui-sref="">PRIVACY POLICY</a></li>
+      <li><a href ui-sref="">NEWS &amp; EVENTS</a></li>
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,583 @@
+/*base*/
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font: normal 16px/1.5 @sans-serif;
+  background: @white;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 15px;
+}
+
+h1 {
+  font: normal 36px/1 @sans-serif;
+}
+
+h2 {
+  font: normal 30px/1 @sans-serif;
+}
+
+h3 {
+  font: normal 24px/1 @sans-serif;
+}
+
+h4 {
+  font: normal 18px/1 @sans-serif;
+}
+
+h5 {
+  font: normal 14px/1 @sans-serif;
+}
+
+h6 {
+  font: normal 12px/1 @sans-serif;
+}
+
+p {
+  font: normal 16px/1.5 @sans-serif;
+}
+
+ol,
+ul {
+  margin: 0;
+}
+
+li {
+  margin: 0;
+}
+
+a, a:link, a:visited {
+  color: @color1;
+  text-decoration: none;
+  outline: none;
+  outline-offset: -2px;
+}
+
+a:focus,
+a:hover {
+  color: @color1-lighter;
+}
+
+/*theme*/
+.btn, a.btn {
+  background-color: @color1;
+  color: @white !important;
+  padding:10px 25px;
+  margin: 0 0 1px;
+  text-transform:uppercase;
+  font:600 14px/1 @sans-serif;
+  transition: all .25s ease;
+}
+
+.btn:active,
+.btn:focus,
+.btn:hover {
+  background-color: @color1-lighter;
+  border-color: @color3;
+  color: white;
+}
+
+.btn-lg {
+  background-color: @color1;
+  color: @white !important;
+  padding:15px 30px;
+  margin: 0 0 1px;
+  text-transform:uppercase;
+  font:600 20px/1 @sans-serif;
+  transition: all .25s ease;
+}
+
+.btn-lg:active,
+.btn-lg:focus,
+.btn-lg:hover {
+  background-color: @color1-lighter;
+  border-color: @color3;
+  color: white;
+}
+
+.btn-brand, a.btn-brand {
+  background-color: @color1 !important;
+  color:white;
+}
+
+.btn-brand:hover, a.btn-brand:hover, .btn-brand:focus, a.btn-brand:focus {
+  background-color: @color1-dark !important;
+  color:white;
+  border-color:@color1 !important;
+}
+
+
+.list-styled {
+  list-style-type: none;
+  padding: 0 0 30px;
+
+  li {
+    list-style-type:none;
+    padding: 5px 0;
+    border-bottom: 1px solid @white-darker;
+  }
+
+  li:last-child {
+    border: 0;
+  }
+
+  li:before {
+    font-family: "arial", sans-serif;
+    content: '\25AA';
+    /* go here for all icons http://www.utf8icons.com/ */
+    color: @color1;
+    padding-right: 5px;
+  }
+}
+
+/*forms*/
+.form-group {
+  .make-md-column(5);
+  margin-bottom: @gutter-sm;
+  padding: 0;
+}
+
+.form-group:nth-child(even) {
+  .make-md-column-offset(2);
+}
+
+.field-group {
+  .make-md-column(12);
+  padding: 0;
+  margin-bottom: 15px;
+
+  .form-group:nth-child(odd) {
+    .make-md-column-offset(2);
+  }
+
+  .form-group:nth-child(even) {
+    margin: 0;
+  }
+}
+
+.control-label {}
+
+input,
+select {
+  margin: 0;
+  @media (max-width: 991px) {
+    margin: 0 0 4px;
+  }
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  float: left;
+  display: inline;
+  margin: 4px 4px 0 0;
+}
+
+input[type="file"] {
+  border: transparent;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+
+/*typography*/
+@sans-serif: "Proxima Nova", sans-serif;
+@script: "Caveat", sans-serif;
+
+/*layout*/
+@grid-float-breakpoint: @screen-md-min;
+@grid-gutter-width: 30px;
+/* gutter width for the grid (container, -row, columns, etc) 40px here = 20px on each side */
+@gutter-sm: 10px;
+@gutter-md: 15px;
+@gutter-lg: 30px;
+
+/* some helpers  */
+.centering-table {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+
+.centering-table-cell {
+  display: table-cell;
+  vertical-align: middle;
+  height: 100%;
+}
+
+.takeover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.clearfixer {
+  content:"";
+  display:block;
+  clear:both;
+}
+
+.blockit {
+  width:100%;
+  float:left;
+  display:block;
+}
+
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+  margin:20px 0;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+/* takes Mr. Bean's google iframe out of the flow of the document */
+iframe[name="google_conversion_frame"] {position:fixed;}
+
+/* maps */
+bd-map {
+  z-index:1;
+}
+
+/*colors*/
+@color1: #85AF4B;
+/*main brand*/
+@color2: #722124;
+/*highlight*/
+@color3: #832A2D;
+/*nuteral secondary*/
+@color4: #333;
+@color5: #333;
+@black: #000000;
+@white: #FFFFFF;
+@text: #414141;
+
+
+
+@color1-dark: darken(@color1, 5%);
+@color1-darker: darken(@color1, 10%);
+@color1-darkest: darken(@color1, 15%);
+@color1-light: lighten(@color1, 5%);
+@color1-lighter: lighten(@color1, 10%);
+@color1-lightest: lighten(@color1, 15%);
+@color2-dark: darken(@color2, 5%);
+@color2-darker: darken(@color2, 10%);
+@color2-darkest: darken(@color2, 15%);
+@color2-light: lighten(@color2, 5%);
+@color2-lighter: lighten(@color2, 10%);
+@color2-lightest: lighten(@color2, 15%);
+@color3-dark: darken(@color3, 5%);
+@color3-darker: darken(@color3, 10%);
+@color3-darkest: darken(@color3, 15%);
+@color3-light: lighten(@color3, 5%);
+@color3-lighter: lighten(@color3, 10%);
+@color3-lightest: lighten(@color3, 15%);
+@color4-dark: darken(@color4, 5%);
+@color4-darker: darken(@color4, 10%);
+@color4-darkest: darken(@color4, 15%);
+@color4-light: lighten(@color4, 5%);
+@color4-lighter: lighten(@color4, 10%);
+@color4-lightest: lighten(@color4, 15%);
+@color5-dark: darken(@color5, 5%);
+@color5-darker: darken(@color5, 10%);
+@color5-darkest: darken(@color5, 15%);
+@color5-light: lighten(@color5, 5%);
+@color5-lighter: lighten(@color5, 10%);
+@color5-lightest: lighten(@color5, 15%);
+@black-light: lighten(@black, 5%);
+@black-lighter: lighten(@black, 10%);
+@black-lightest: lighten(@black, 15%);
+@white-dark: darken(@white, 5%);
+@white-darker: darken(@white, 10%);
+@white-darkest: darken(@white, 15%);
+
+.color1 {
+  height: 170px;
+  padding-top: 120px;
+  background-color: @color1;
+
+  .darkest {
+    .make-md-column(2);
+    background-color: @color1-darkest;
+    height: 50px;
+    padding: 0;
+  }
+
+  .darker {
+    .make-md-column(2);
+    background-color: @color1-darker;
+    height: 50px;
+    padding: 0;
+  }
+
+  .dark {
+    .make-md-column(2);
+    background-color: @color1-dark;
+    height: 50px;
+    padding: 0;
+  }
+
+  .light {
+    .make-md-column(2);
+    background-color: @color1-light;
+    height: 50px;
+    padding: 0;
+  }
+
+  .lighter {
+    .make-md-column(2);
+    background-color: @color1-lighter;
+    height: 50px;
+    padding: 0;
+  }
+
+  .lightest {
+    .make-md-column(2);
+    background-color: @color1-lightest;
+    height: 50px;
+    padding: 0;
+  }
+}
+
+.color2 {
+  height: 170px;
+  padding-top: 120px;
+  background-color: @color2;
+
+  .darkest {
+    .make-md-column(2);
+    background-color: @color2-darkest;
+    height: 50px;
+    padding: 0;
+  }
+
+  .darker {
+    .make-md-column(2);
+    background-color: @color2-darker;
+    height: 50px;
+    padding: 0;
+  }
+
+  .dark {
+    .make-md-column(2);
+    background-color: @color2-dark;
+    height: 50px;
+    padding: 0;
+  }
+
+  .light {
+    .make-md-column(2);
+    background-color: @color2-light;
+    height: 50px;
+    padding: 0;
+  }
+
+  .lighter {
+    .make-md-column(2);
+    background-color: @color2-lighter;
+    height: 50px;
+    padding: 0;
+  }
+
+  .lightest {
+    .make-md-column(2);
+    background-color: @color2-lightest;
+    height: 50px;
+    padding: 0;
+  }
+}
+
+.color3 {
+  height: 170px;
+  padding-top: 120px;
+  background-color: @color3;
+
+  .darkest {
+    .make-md-column(2);
+    background-color: @color3-darkest;
+    height: 50px;
+    padding: 0;
+  }
+
+  .darker {
+    .make-md-column(2);
+    background-color: @color3-darker;
+    height: 50px;
+    padding: 0;
+  }
+
+  .dark {
+    .make-md-column(2);
+    background-color: @color3-dark;
+    height: 50px;
+    padding: 0;
+  }
+
+  .light {
+    .make-md-column(2);
+    background-color: @color3-light;
+    height: 50px;
+    padding: 0;
+  }
+
+  .lighter {
+    .make-md-column(2);
+    background-color: @color3-lighter;
+    height: 50px;
+    padding: 0;
+  }
+
+  .lightest {
+    .make-md-column(2);
+    background-color: @color3-lightest;
+    height: 50px;
+    padding: 0;
+  }
+}
+
+.color4 {
+  height: 170px;
+  padding-top: 120px;
+  background-color: @color4;
+
+  .darkest {
+    .make-md-column(2);
+    background-color: @color4-darkest;
+    height: 50px;
+    padding: 0;
+  }
+
+  .darker {
+    .make-md-column(2);
+    background-color: @color4-darker;
+    height: 50px;
+    padding: 0;
+  }
+
+  .dark {
+    .make-md-column(2);
+    background-color: @color4-dark;
+    height: 50px;
+    padding: 0;
+  }
+
+  .light {
+    .make-md-column(2);
+    background-color: @color4-light;
+    height: 50px;
+    padding: 0;
+  }
+
+  .lighter {
+    .make-md-column(2);
+    background-color: @color4-lighter;
+    height: 50px;
+    padding: 0;
+  }
+
+  .lightest {
+    .make-md-column(2);
+    background-color: @color4-lightest;
+    height: 50px;
+    padding: 0;
+  }
+}
+
+.color5 {
+  height: 170px;
+  padding-top: 120px;
+  background-color: @color5;
+
+  .darkest {
+    .make-md-column(2);
+    background-color: @color5-darkest;
+    height: 50px;
+    padding: 0;
+  }
+
+  .darker {
+    .make-md-column(2);
+    background-color: @color5-darker;
+    height: 50px;
+    padding: 0;
+  }
+
+  .dark {
+    .make-md-column(2);
+    background-color: @color5-dark;
+    height: 50px;
+    padding: 0;
+  }
+
+  .light {
+    .make-md-column(2);
+    background-color: @color5-light;
+    height: 50px;
+    padding: 0;
+  }
+
+  .lighter {
+    .make-md-column(2);
+    background-color: @color5-lighter;
+    height: 50px;
+    padding: 0;
+  }
+
+  .lightest {
+    .make-md-column(2);
+    background-color: @color5-lightest;
+    height: 50px;
+    padding: 0;
+  }
+}
+
+.state-style-guide {
+  header, footer, .inside-header {
+
+  }
+
+  section {
+    margin:0 0 50px 0;
+    .clearfixer;
+  }
+}
+
+.sg-wrap {
+  padding:60px 0;
+}
+.sg-masthead {
+  font:700 55px/1 @sans-serif;
+  text-transform: uppercase;
+  margin:100px 0 50px 0;
+}
+
+.sg-header {
+  font:100 32px/1 @sans-serif;
+  text-transform: uppercase;
+  padding:0 0 15px 0;
+  border-bottom:1px solid @black-lightest;
+}
+/***** Fade in on a page load *****/
+@keyframes fadeIn {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}

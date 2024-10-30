@@ -1,0 +1,9 @@
+<a ng-if="template == 'counter'" href="" ng-click="open()" class="quick-view-lightbox-photos"><i class="fa fa-camera" aria-hidden="true"></i> {{count}} photos</a>
+<a ng-if="template == 'counterone'" href="" ng-click="open()" class="quick-view-lightbox-photos"><i class="fa fa-camera" aria-hidden="true"></i> {{count}} photos</a>
+<a ng-if="template == 'floorplanicon'" href="" ng-click="open()" class="quick-view-lightbox-floorplan"><img ng-src="/images/icon-floorplans.jpg" /></a>
+<a ng-if="template == 'quicklook'" href="" ng-click="open()" class="quick-view-lightbox"><i class="fa fa-arrows-alt" aria-hidden="true"></i> quick look</a>
+<a ng-if="template == 'single'" href="" ng-click="open()" class="quick-view-lightbox"></a>
+
+<a ng-if="template == ''" href="" ng-click="open()" class="quick-view-lightbox-transclude">
+  <ng-transclude></ng-transclude>
+</a>

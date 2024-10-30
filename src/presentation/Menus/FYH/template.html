@@ -1,0 +1,30 @@
+<div class="bd-results-filters">
+  <ul class="navbar-collapse list-unstyled">
+    <li>
+      <a href ui-sref="fyh({'#':null})" ng-class="{'active':!$stateParams['#']}" class="btn"> <i class="fa fa-map-marker" aria-hidden="true"></i> communities</a>
+      <a href ui-sref="fyh({'#':'homes'})" ng-class="{'active':$stateParams['#'] == 'homes'}" class="btn"> <i class="fa fa-home" aria-hidden="true"></i> quick move-in homes</a>
+    </li>
+    <li uib-dropdown class="filter-label"> Filter by <a ng-if="!area.name" href uib-dropdown-toggle class="filter-select">Metro Areas</a> <a ng-if="area.name" href uib-dropdown-toggle class="filter-select">{{area.name}} Area</a>
+      <ul uib-dropdown-menu>
+        <li class="location-jump-header"> <a href ui-sref="fyh({'#':$stateParams['#'], com_state:'louisiana', com_area:''})">Louisiana</a> </li>
+        <li ng-repeat="com in communities | match:'address.addressRegion':'LA' | has:'area.name' | unique:'area.name' | orderBy:'area.name'"> <a href ui-sref="fyh({'#':$stateParams['#'], com_state:$filter('machine')($filter('stateName')(com.address.addressRegion)), com_area:$filter('machine')(com.area.name)})">
+            {{com.area.name}} Area
+          </a> </li>
+        <li class="location-jump-header"> <a href ui-sref="fyh({'#':$stateParams['#'], com_state:'mississippi', com_area:''})">Mississippi</a> </li>
+        <li ng-repeat="com in communities | match:'address.addressRegion':'MS' | has:'area.name' | unique:'area.name' | orderBy:'area.name'"> <a href ui-sref="fyh({'#':$stateParams['#'], com_state:$filter('machine')($filter('stateName')(com.address.addressRegion)), com_area:$filter('machine')(com.area.name)})">
+            {{com.area.name}} Area
+          </a> </li>
+        <li class="location-jump-header"> <a href ui-sref="fyh({'#':$stateParams['#'], com_state:'alabama', com_area:''})">Alabama</a> </li>
+        <li ng-repeat="com in communities | match:'address.addressRegion':'AL' | has:'area.name' | unique:'area.name' | orderBy:'area.name'"> <a href ui-sref="fyh({'#':$stateParams['#'], com_state:$filter('machine')($filter('stateName')(com.address.addressRegion)), com_area:$filter('machine')(com.area.name)})">
+            {{com.area.name}} Area
+          </a> </li>
+        <li class="location-jump-header"> <a href ui-sref="fyh({'#':$stateParams['#'], com_state:'florida', com_area:''})">Florida</a> </li>
+        <li ng-repeat="com in communities | match:'address.addressRegion':'FL' | has:'area.name' | unique:'area.name' | orderBy:'area.name'"> <a href ui-sref="fyh({'#':$stateParams['#'], com_state:$filter('machine')($filter('stateName')(com.address.addressRegion)), com_area:$filter('machine')(com.area.name)})">
+            {{com.area.name}} Area
+          </a> </li>
+      </ul>
+    </li>
+    <li class="hidden-sm hidden-xs"> <a ng-class="{'active':!websiteService.mapVisible}" href ng-click="websiteService.mapVisible = false" class="btn"><i class="fa fa-th" aria-hidden="true"></i> grid view</a> <a ng-class="{'active':websiteService.mapVisible}" href ng-click="websiteService.mapVisible = true"
+          class="btn"><i class="fa fa-map-o" aria-hidden="true"></i> map view</a> </li>
+  </ul>
+</div>

@@ -1,0 +1,68 @@
+<div ng-controller="HoaRegisterController as ctrl">
+  <h2>Homeowner Portal Registration</h2>
+
+  <div class="row">
+    <div class="col-md-12">
+      Registration Copy
+      <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt officiis aliquid voluptatibus laborum nisi, voluptatum nostrum perferendis magnam necessitatibus ut quae at vero error labore temporibus! Alias, magnam, eum! Excepturi.</div>
+      <div>Officia laboriosam, cupiditate magnam suscipit ducimus temporibus distinctio possimus iusto corporis voluptatibus autem a at inventore maxime aspernatur velit, quaerat, voluptates eaque est magni. Enim beatae necessitatibus modi laborum, odio?</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <form name="ctrl.RegisterForm" ng-submit="ctrl.register()" novalidate>
+        <div class="account row">
+          <label class="col-md-6 col-sm-12">
+            Your Community <span class="text-danger" ng-if="ctrl.RegisterForm.$submitted && ctrl.RegisterForm.community.$error.required">Your Community must be selected</span>
+            <select class="form-control" name="community" required ng-model="ctrl.user.hoa_community" ng-options="community as community.name for community in ctrl.communities">
+              <option value="">Select a community</option>
+            </select>
+          </label>
+          <label class="col-md-6 col-sm-12">
+            Name <span class="text-danger" ng-if="ctrl.RegisterForm.$submitted && ctrl.RegisterForm.name.$error.required">Name is required</span>
+            <input class="form-control" name="name" type="text" ng-model="ctrl.user.name" required />
+          </label>
+          <label class="col-md-6 col-sm-12">
+            Street Address <span class="text-danger" ng-if="ctrl.RegisterForm.$submitted && ctrl.RegisterForm.address.$error.required">Street Address is required</span>
+            <input class="form-control" name="address" type="text" ng-model="ctrl.user.address" required />
+          </label>
+          <label class="col-md-6 col-sm-12">
+            Phone
+            <input class="form-control" name="phone" type="text" ng-model="ctrl.user.phone" />
+          </label>
+          <label class="col-md-6 col-sm-12">
+            Email
+            <span class="text-danger" ng-if="ctrl.RegisterForm.$submitted && ctrl.RegisterForm.email.$error.required">Email is required</span>
+            <span class="text-danger" ng-if="ctrl.RegisterForm.$submitted && ctrl.RegisterForm.email.$error.email">Email must be valid</span>
+            <input class="form-control" name="email" type="email" ng-model="ctrl.user.email" required />
+          </label>
+          <label class="col-md-6 col-sm-12">
+            Password <span class="text-danger" ng-if="ctrl.RegisterForm.$submitted && ctrl.RegisterForm.password.$error.required">Password is required</span>
+            <input class="form-control" name="password" type="password" ng-model="ctrl.user.password" required />
+          </label>
+          <label class="col-md-6 col-sm-12">
+            Confirm Password
+            <span class="text-danger" ng-if="ctrl.RegisterForm.$submitted && !ctrl.passwordsMatch()">Passwords Must Match</span>
+            <span class="text-danger" ng-if="ctrl.RegisterForm.$submitted && ctrl.RegisterForm.password.$error.required && ctrl.RegisterForm.confirm_password.$error.required">Confirm Password is required</span>
+            <input class="form-control" name="confirm_password" type="password" ng-model="ctrl.user.confirm_password" required />
+          </label>
+        </div>
+        <div class="row">
+          <label class="col-md-6 col-sm-12">
+            Are you available to babysit?
+            <input type="checkbox" name="babysit" ng-model="ctrl.user.babysit" />
+          </label>
+          <label class="col-md-6 col-sm-12">
+            Are you available to petsit?
+            <input type="checkbox" name="petsit" ng-model="ctrl.user.petsit" />
+          </label>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <button class="btn btn-primary" tyoe="submit">Register</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

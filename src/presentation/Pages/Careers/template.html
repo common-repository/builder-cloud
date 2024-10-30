@@ -1,0 +1,14 @@
+<section class="page-template careers">
+  <div class="container">
+    <p ng-bind-html="pages.careers.lead_copy" class="lead-copy"></p>
+    <p ng-bind-html="pages.careers.page_copy"></p>
+    <ul class="results-wrapper list-unstyled">
+      <li ng-repeat="review in pages.careers.company_reviews" class="result">
+        <div class="media">
+          <a href="{{review.url}}" target="_blank"><img src="{{review.media.contentUrl}}" /></a>
+        </div>
+      </li>
+    </ul>
+    <script id="gnewtonjs" type="text/javascript" src="//newton.newtonsoftware.com/career/iframe.action?clientId=8a3b93ee4911cd4301491fdec3a97742"></script>
+  </div>
+</section>

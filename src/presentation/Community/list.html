@@ -1,0 +1,32 @@
+<section>
+  <div class="bd-results-map container">
+    <!-- id is required.  Element must be display:block and have width and height.  -->
+    <!-- To display multipe maps on the same page, be sure to give each map a unique id -->
+    <bd-map id="communitiesMap" markers="communities" filters="[urlFilter]" max-zoom="13" marker-icon="/images/map-markers/map-pin-green.png" popup-template="communitiesPopup.html" marker-width="31" marker-height="46"> </bd-map>
+    <!-- id matches popup-template attribute of bd-map element above-->
+    <!-- If the popup template is an <a href=""></a> tag with no contents the marker itself becomes the link -->
+    <script type="text/ng-template" id="communitiesPopup.html"> <img src="{{logo.contentUrl|thumbnail:170:113:true}}" style="width:170px; height:113px;">
+      <div class="map-popup-text">
+        <h4>{{name}}</h4>
+        <ul class="list-unstyled">
+          <li><strong>Location:</strong> {{address.addressLocality}}</li>
+          <li ng-if="priceLow" class="hidden-sm hidden-xs"><strong>From: </strong>{{priceLow|currency:$:0}}</li>
+          <li><a href="/communities/{{uniqueName}}" class="btn" target="_blank">View Details</a></li>
+        </ul>
+      </div>
+    </script>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="row">
+      <ul class="list-unstyled communities" ng-init="communityLimit = 20">
+        <li class="result" ng-repeat="community in comsFiltered = (communities | filter:urlFilter) | orderBy:order_field | limitTo:communityLimit">
+          <community-card community="community"/>
+        </li>
+        <li ng-if="comsFiltered.length > communityLimit" class="load-more-wrapper"><a href ng-click="communityLimit = communityLimit + 20" class="load-more">Load More Results</a></li>
+      </ul>
+    </div>
+  </div>
+</section>

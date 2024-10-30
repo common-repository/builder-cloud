@@ -1,0 +1,24 @@
+<div ng-cloak ng-controller="CommonController">
+
+  <dir-pagination-controls></dir-pagination-controls>
+
+  <section class="cards">
+    <div class="card" dir-paginate="community in communities | itemsPerPage:12">
+      <a href="?id={{community.uniqueName}}">
+        <div class="thumbnail">
+          <img ng-src="{{community.logo.contentUrl|thumbnail:240:180:true}}" alt="">
+        </div>
+        <div class="card-content">
+          <h2>{{community.name}}</h2>
+          <h3>{{community.address.streetAddress}}</h3>
+          <p>{{community.description|characters:400}}</p>
+        </div>
+      </a>
+    </div>
+
+    <div ng-if="!ready" ng-include="BUILDERCLOUD.PURL + '/templates/loading.html'"></div>
+  </section>
+
+  <dir-pagination-controls></dir-pagination-controls>
+
+</div>

@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <ng-include src="'/presentation/HOAPortal/menu.html'"></ng-include>
+    </div>
+    <div class="col-md-10" ng-controller="HoaContactController as ctrl">
+      <h2>Homeowner Portal Contact Management</h2>
+
+      <div class="row">
+        <div class="col-md-12">{{ctrl.management.description}}</div>
+      </div>
+      <div class="row" ng-if="!ctrl.success">
+        <div class="col-md-12">
+          <form name="ctrl.ContactForm" ng-submit="ctrl.submitMessage()" novalidate>
+            <div class="account row">
+              <label class="col-md-6 col-sm-12">
+                Name <span class="error" ng-if="ctrl.ContactForm.$submitted && ctrl.ContactForm.name.$error.required">Name is required</span>
+                <input class="form-control" name="name" type="text" ng-model="ctrl.message.name" required />
+              </label>
+              <label class="col-md-6 col-sm-12">
+                Phone
+                <input class="form-control" name="phone" type="text" ng-model="ctrl.message.phone" />
+              </label>
+              <label class="col-md-6 col-sm-12">
+                Email
+                <span class="error" ng-if="ctrl.ContactForm.$submitted && ctrl.ContactForm.email.$error.required">Email is required</span>
+                <span class="error" ng-if="ctrl.ContactForm.$submitted && ctrl.ContactForm.email.$error.email">Email must be valid</span>
+                <input class="form-control" name="email" type="email" ng-model="ctrl.message.email" required />
+              </label>
+              <label class="col-md-6 col-sm-12">
+                Questions / Comments
+                <textarea class="form-control" ng-model="ctrl.message.comments"></textarea>
+              </label>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+                <button class="btn btn-primary" tyoe="submit">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row" ng-if="ctrl.success">
+        <div class="col-sm-12">
+          <h2>Thanks for contacting us</h2>
+          <p>We have recieved your message and will contact you soon.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

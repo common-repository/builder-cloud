@@ -1,0 +1,43 @@
+<div class="bd-results-wrapper-state">
+  <div class="bd-results-map">
+    <!-- id is required.  Element must be display:block and have width and height.  -->
+    <!-- To display multipe maps on the same page, be sure to give each map a unique id -->
+    <bd-map id="homesMap" markers="homes" filters="[urlFilter, websiteService.redHotFilter]" max-zoom="13" marker-icon="/images/map-markers/map-pin.png" popup-template="homesPopup.html" marker-width="31" marker-height="46"> </bd-map>
+    <!-- id matches popup-template attribute of bd-map element above-->
+    <script type="text/ng-template" id="homesPopup.html"> <img src="{{photos[0].contentUrl|thumbnail:170:113:true}}" style="width:170px; height:113px;">
+      <div class="map-popup-text">
+        <h4>{{address.streetAddress}}</h4>
+        <ul class="list-unstyled">
+          <li ng-if="status" class="hidden-sm hidden-xs"><strong>Status:</strong> {{status}}</li>
+          <li class="hidden-sm hidden-xs"><strong>Price:</strong> {{price|currency:$:0}}</li>
+          <li><strong>beds:</strong> {{beds}} <strong>baths:</strong> {{baths}} <strong>sqft:</strong> {{sqft|number}}</li>
+          <li ng-if="plan.name"><strong>Plan Name:</strong> {{plan.name}}</li>
+          <li><a href="/homes/{{uniqueName}}" class="btn" target="_blank">View Details</a></li>
+        </ul>
+      </div>
+    </script>
+  </div>
+  <div class="bd-results-list">
+    <ul class="list-unstyled results-wrapper" ng-init="websiteService.homelimit = 20">
+      <li class="result" ng-repeat="home in invFiltered = (homes | filter:urlFilter | filter:websiteService.redHotFilter) | orderBy:order_field | limitTo:websiteService.homelimit">
+        <div class="result-media">
+          <a href ui-sref="home({inv_id:home.uniqueName, '#':null})" title="{{home.photos[0].title}}" target="_blank"> <img ng-src="{{home.photos[0].contentUrl|thumbnail:260:185:true}}" alt="{{home.photos[0].caption}}" /> </a>
+          <div class="overlay-status" ng-if="home.status == 'Sold'"><img ng-src="/images/sold.png" width="67" height="66" /></div>
+          <lightbox template="quicklook" photos="home.photos"></lightbox>
+        </div>
+        <div class="result-content">
+          <h4 class="result-title"><a href ui-sref="home({inv_id:home.uniqueName, '#':null})" target="_blank">{{home.address.streetAddress}}</a></h4>
+          <ul>
+            <li>{{home.address.addressLocality}}, {{home.address.addressRegion}}</li>
+            <li ng-if="home.status"><strong>Status:</strong> {{home.status|rename}}</li>
+            <li><strong>price:</strong> {{home.price | currency:"$":0}}</li>
+            <li><strong>beds:</strong> {{home.beds}} <strong>baths:</strong> {{home.baths}} <strong>sqft:</strong> {{home.sqft|number}}</li>
+            <li ng-if="home.plan.name"><strong>Plan Name:</strong> {{home.plan.name}}</li>
+          </ul>
+          <div> <a class="btn" href ui-sref="home({inv_id:home.uniqueName, '#':null})" target="_blank">learn more</a> <a class="btn hidden-sm hidden-xs" href bd-map-popup="home">view on map</a> </div>
+        </div>
+      </li>
+      <li ng-if="invFiltered.length > websiteService.homelimit" class="load-more-wrapper"><a href ng-click="websiteService.homelimit = websiteService.homelimit + 20" class="load-more">Load More Results</a></li>
+    </ul>
+  </div>
+</div>

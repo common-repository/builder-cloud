@@ -1,0 +1,45 @@
+<div class="bd-results-wrapper-area">
+  <div class="bd-results-map">
+    <!-- id is required.  Element must be display:block and have width and height.  -->
+    <!-- To display multipe maps on the same page, be sure to give each map a unique id -->
+    <bd-map id="homesMap" markers="homes" filters="[urlFilter]" max-zoom="13" marker-icon="/images/map-markers/map-pin.png" popup-template="homesPopup.html" marker-width="31" marker-height="46"> </bd-map>
+    <!-- id matches popup-template attribute of bd-map element above-->
+    <script type="text/ng-template" id="homesPopup.html"> <img src="{{photos[0].contentUrl|thumbnail:170:113:true}}" style="width:170px; height:113px;">
+      <div class="map-popup-text">
+        <h4>{{address.streetAddress}}</h4>
+        <ul class="list-unstyled">
+          <li class="hidden-sm hidden-xs">{{price|currency:$:0}}</li>
+          <li ng-if="status" class="hidden-sm hidden-xs"><strong>Status: </strong>{{status}}</li>
+          <li ng-if="status" class="hidden-sm hidden-xs"><strong>Status: </strong>{{status}}</li>
+          <li><a href="/homes/{{uniqueName}}" class="btn">View Details</a></li>
+        </ul>
+      </div>
+    </script>
+  </div>
+  <div class="bd-results-list">
+    <div class="container">
+      <ul class="list-unstyled results-wrapper results-zigzag">
+        <li class="result result-zigzag" ng-repeat="home in homes | filter:urlFilter | orderBy:order_field">
+          <div class="result-media" ng-style="{'background-image':'url('+home.photos[0].contentUrl+')'}"></div>
+          <div class="result-content">
+            <div class="takeover">
+              <div class="centering-table">
+                <div class="centering-table-cell">
+                  <h4 class="result-title">{{home.address.streetAddress}}</h4>
+                  <ul>
+                    <li><strong>price:</strong> {{home.price | currency:"$":0}}</li>
+                    <li><strong>Beds:</strong> {{home.beds}}</li>
+                    <li><strong>baths:</strong> {{home.bathsFull}}</li>
+                    <li><strong>SQFT:</strong> {{home.sqft|number}}</li>
+                  </ul>
+                  <div> <a class="btn" href ui-sref="home({inv_id:home.uniqueName, '#':null})">learn more</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<ng-include src="'/components/state-info.html'"></ng-include>

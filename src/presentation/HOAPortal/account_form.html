@@ -1,0 +1,48 @@
+<div class="account row">
+  <h4 class="header">{{user.name}} <i class="fa fa-remove" ng-click="delete({ user: user })" ng-if="!isSelf"></i></h4>
+  <label class="col-md-6 col-sm-12">
+    Name
+    <input class="form-control" name="name" type="text" ng-model="user.name" />
+  </label>
+  <label class="col-md-6 col-sm-12">
+    Street Address
+    <input class="form-control" name="address" type="text" ng-model="user.address" />
+  </label>
+  <label class="col-md-6 col-sm-12">
+    Phone
+    <input class="form-control" name="phone" type="text" ng-model="user.phone" />
+  </label>
+  <label class="col-md-6 col-sm-12">
+    Email
+    <input class="form-control" name="email" type="text" ng-model="user.email" />
+  </label>
+  <label class="col-md-6 col-sm-12">
+    Password
+    <input class="form-control" name="password" type="password" ng-model="user.password" />
+  </label>
+</div>
+<div class="row">
+  <label class="col-md-6 col-sm-12">
+    Are you available to babysit?
+    <input type="checkbox" name="babysit" ng-model="user.babysit" />
+  </label>
+  <label class="col-md-6 col-sm-12">
+    Are you available to petsit?
+    <input type="checkbox" name="petsit" ng-model="user.petsit" />
+  </label>
+</div>
+<div class="row">
+  <label class="col-md-6 col-sm-12" ng-if="!isSelf">
+    Contact Type
+    <select name="contact-type" class="form-control" ng-model="user.contactType">
+      <option value="">Select One</option>
+      <option value="secondary">Secondary</option>
+      <option value="dependent">Dependent</option>
+    </select>
+  </label>
+</div>
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+    <button class="btn btn-primary" ng-click="save({ user: user })">Save</button>
+  </div>
+</div>

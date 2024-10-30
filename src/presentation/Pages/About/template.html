@@ -1,0 +1,28 @@
+<section class="page-template about">
+  <div class="container">
+    <p ng-bind-html="pages.about_us.lead_copy" class="lead-copy"></p>
+    <blockquote ng-bind-html="pages.about_us.blockquote"></blockquote>
+  </div>
+  <div class="container">
+    <div class="media"> <img src="{{pages.about_us.page_copy_image.contentUrl}}" /> </div>
+    <div class="content">
+      <p ng-bind-html="pages.about_us.page_copy"></p>
+      <div ng-repeat="vidd in pages.about_us.storyvideo">
+        <p ng-bind-html="vidd.storyvid" class="videoWrapper"></p>
+
+      </div>
+    </div>
+  </div>
+</section>
+<section ng-repeat="client in pages.testimonials.client_testimonials|limitTo:1" class="testimonials-widget" ng-style="{'background-image':'url('+$filter('thumbnail')(client.photo.contentUrl,1650,1650)+')'}">
+  <div class="result">
+    <div class="container">
+      <p ng-if="client.copy">{{client.copy}}</p>
+      <!--<p ng-if="client.name"><strong>{{client.name}} <span ng-if="client.location">| {{client.location}}</span></strong></p>--><a ng-href="/testimonials" class="btn">More Testimonials</a> </div>
+  </div>
+</section>
+<section class="about-cta">
+  <div class="container">
+    <p ng-bind-html="pages.about_us.cta"></p>
+  </div>
+</section>

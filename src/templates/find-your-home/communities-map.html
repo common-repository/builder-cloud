@@ -1,0 +1,38 @@
+<div class="bd-results-wrapper-state">
+  <div class="bd-results-map">
+    <!-- id is required.  Element must be display:block and have width and height.  -->
+    <!-- To display multipe maps on the same page, be sure to give each map a unique id -->
+    <bd-map id="communitiesMap" markers="communities" filters="[urlFilter]" max-zoom="13" marker-icon="/images/map-markers/map-pin-green.png" popup-template="communitiesPopup.html" marker-width="31" marker-height="46"> </bd-map>
+    <!-- id matches popup-template attribute of bd-map element above-->
+    <!-- If the popup template is an <a href=""></a> tag with no contents the marker itself becomes the link -->
+    <script type="text/ng-template" id="communitiesPopup.html"> <img src="{{logo.contentUrl|thumbnail:170:113:true}}" style="width:170px; height:113px;">
+      <div class="map-popup-text">
+        <h4>{{name}}</h4>
+        <ul class="list-unstyled">
+          <li><strong>Location:</strong> {{address.addressLocality}}</li>
+          <li ng-if="priceLow" class="hidden-sm hidden-xs"><strong>From: </strong>{{priceLow|currency:$:0}}</li>
+          <li><a href="/communities/{{uniqueName}}" class="btn" target="_blank">View Details</a></li>
+        </ul>
+      </div>
+    </script>
+  </div>
+  <div class="bd-results-list">
+    <ul class="list-unstyled results-wrapper" ng-init="websiteService.communityLimit = 20">
+      <li class="result" ng-repeat="community in comsFiltered = (communities | filter:urlFilter) | orderBy:'name' | limitTo:websiteService.communityLimit">
+        <div class="result-media">
+          <a href ui-sref="community({com_id:community.uniqueName, '#':null})" title="{{community.logo.title}}" target="_blank"> <img ng-src="{{community.logo.contentUrl|thumbnail:550:390:true}}" alt="{{community.logo.caption}}" /> </a>
+          <lightbox template="quicklook" photos="community.photos"></lightbox>
+        </div>
+        <div class="result-content">
+          <h4 class="result-title"><a href ui-sref="community({com_id:community.uniqueName, '#':null})" target="_blank">{{community.name}}</a></h4>
+          <ul>
+            <li><strong>location:</strong> {{community.address.addressLocality}}</li>
+            <li><strong>from:</strong> ${{community.priceLow |human}}</li>
+          </ul>
+          <div> <a class="btn" href ui-sref="community({com_id:community.uniqueName, '#':null})" target="_blank">learn more</a> <a class="btn hidden-sm hidden-xs" href bd-map-popup="community">view on map</a> </div>
+        </div>
+      </li>
+      <li ng-if="comsFiltered.length > websiteService.communityLimit" class="load-more-wrapper"> <a href ng-click="websiteService.communityLimit = websiteService.communityLimit + 20" class="load-more">Load More Results</a> </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,100 @@
+<section class="detail-header">
+  <div class="detail-header-media">
+    <div uib-carousel active="carouselactiveslide" interval="5000" template-url="/presentation/Carousel/ry.html">
+      <div uib-slide ng-repeat="slide in home.photos track by $index" index="$index" style="background-image:url('{{slide.contentUrl}}')">
+        <!--  <img ng-src="{{slide.contentUrl|thumbnail:640:400:true}}" />  --></div>
+    </div>
+    <lightbox ng-if="home.photos.length > 1" photos="home.photos" template="counter"></lightbox>
+    <lightbox ng-if="home.photos.length == 1" photos="home.photos" template="counterone"></lightbox>
+  </div>
+  <div class="detail-header-content">
+    <div class="takeover">
+      <h1 ng-bind-html="seo.h1"></h1>
+      <div class="fav-wrap">
+        <favorite sref="['home', {home_id: home.uniqueName}]" type="Home" title="{{home.address.streetAddress}}" li="${{home.price|number}}" lii="Beds: {{home.beds}}" liii="Baths: {{home.baths}}" image="{{home.photos[0].contentUrl}}"></favorite>
+      </div>
+      <h3>{{home.address.addressLocality}}, {{home.address.addressRegion}} {{home.address.postalCode}}</h3>
+      <ul class="stats-2col">
+        <li ng-if="home.price"><strong>Price:</strong> <span>${{home.price|number:0}}</span> <span ng-if="home.hot_home_original_price" class="orig-price status">{{home.hot_home_original_price}}</span></li>
+        <li ng-if="home.status"><strong>Status:</strong> <span class="status">{{home.status|rename}}</span></li>
+        <li ng-if="home.headline">{{home.headline}}</li>
+        <li ng-if="home.moveInDate"><strong>Available:</strong> {{home.moveInDate| date:'MMMM yyyy'}}</li>
+        <li ng-if="home.mls"><strong>MLS#:</strong> {{home.mls}}</li>
+        <li ng-if="home.lot"><strong>Lot#:</strong> {{home.lot}}</li>
+        <li ng-if="home.type"><strong>Property Type:</strong> {{home.type}}</li>
+        <li><strong>Community:</strong> <a href ui-sref="community({com_id:home.containedIn.uniqueName})">{{home.containedIn.name}}</a></li>
+        <li ng-if="home.plan.name"><strong>Plan Name:</strong> <a href ui-sref="plan({com_id: home.containedIn.uniqueName, plan_id:home.plan.uniqueName})">{{home.plan.name}}</a></li>
+        <!-- <li><strong>SQFT:</strong> {{home.sqft|number}}</li> -->
+      </ul>
+      <ul class="stats-2col borders">
+        <li ng-if="home.beds"><i class="fa fa-bed" aria-hidden="true"></i> {{home.beds}}</li>
+        <li ng-if="home.baths"><i class="fa fa-bath" aria-hidden="true"></i> {{home.baths}}</li>
+        <li ng-if="home.sqft"><i class="fa fa-columns" aria-hidden="true"></i></i> {{home.sqft|number}}</li>
+        <li ng-if="home.garages"><i class="fa fa-car" aria-hidden="true"></i></i> {{home.garages}}</li>
+      </ul>
+      <ul class="list-unstyled cta-btn-set">
+        <!-- <li> <a href="" onclick="history.go(-1);" class="btn">back</a> </li> -->
+        <li><a href ui-sref="community({com_id:home.containedIn.uniqueName})" class="btn">Community Page</a></li>
+        <li> <a href="#" modal template="/presentation/Forms/contact.html" class="btn btn-brand">Request Info</a> </li>
+        <li ng-if="area.dsld_mortgage"> <a href="http://www.dsldmortgage.com" class="btn" target="_blank">mortgage info</a> </li>
+        <li> <a href="http://maps.google.com/?q={{home.geoIndexed[1]}},{{home.geoIndexed[0]}}" class="btn" target="_blank">location</a> </li>
+      </ul>
+      <div class="detail-next">
+        <div ng-repeat="inv in community.homes | orderBy:'address.streetAddress'" class="detail-next-btn-wrap">
+          <div ng-if="community.currentHomeIndex == $index + 1" class="previous-wrapper"><a href ui-sref="home({inv_id:inv.uniqueName})" class="btn"><strong><i class="fa fa-arrow-left" aria-hidden="true"></i> Previous Home</strong></a> </div>
+          <div ng-if="inv._id == home._id" ng-init="community.currentHomeIndex = $index" style="display:none;">
+            <!--current-->
+          </div>
+          <div ng-if="community.currentHomeIndex == ($index - 1)" class="next-wrapper"><a href ui-sref="home({inv_id:inv.uniqueName})" class="btn"><strong>Next Home <i class="fa fa-arrow-right" aria-hidden="true"></i></strong></a> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="detail-content">
+  <div class="container">
+    <div class="row">
+      <div class="detail-main-content">
+        <h4 class="detail-section-headline">home description</h4>
+        <div ng-if="home.description" ng-bind-html="home.description"></div>
+        <div ng-if="!home.description">There is no description for this home at this time.</div>
+      </div>
+      <div class="detail-sidebar-content">
+        <div class="detail-floorplans-section">
+          <h5 class="detail-sidebar-header">floorplan</h5>
+          <lightbox photos="home.floorplanPhotos" template="floorplanicon"></lightbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<bd-map style="display:block; width:100%; height:400px; border-top:1px solid #e0dbdb; border-bottom:1px solid #e0dbdb;" id="homeDetailMap" markers="home" max-zoom="13" marker-icon="/images/map-markers/map-pin.png" marker-width="31" marker-height="46"
+    popup-template="homeDetailPopup.html"> </bd-map>
+<!-- If the popup template is an <a href=""></a> tag with no contents the marker itself becomes the link -->
+<script type="text/ng-template" id="homeDetailPopup.html">
+  <a target="_blank" href="http://maps.google.com/?q={{geoIndexed[1]}},{{geoIndexed[0]}}"></a>
+</script>
+<section class="detail-contact">
+  <div class="container">
+    <div class="row">
+      <h4 class="detail-section-headline">get in touch with us</h4>
+      <div class="detail-contact-wrapper">
+        <div class="detail-contact-content">
+          <div class="detail-contact-content-heading">
+            <h3 class="detail-sidebar-header">Agent Info</h3> </div>
+          <ul ng-repeat="agt in community.agents track by $index" class="list-unstyled">
+            <li ng-if="!agt.mortgage_loan_originator && !agt.senior_mortgage_loan_originator && !agt.sales_agent"><strong class="blockit">Builder Sales Representative:</strong> {{agt.name}}</li>
+            <li ng-if="agt.sales_agent"><strong class="blockit">Sales Agent:</strong> {{agt.name}}</li>
+            <li ng-if="agt.mortgage_loan_originator"><strong class="blockit">Mortgage Loan Originator:</strong> {{agt.name}}</li>
+            <li ng-if="agt.senior_mortgage_loan_originator"><strong class="blockit">Sr. Mortgage Loan Originator:</strong> {{agt.name}}</li>
+            <li ng-if="agt.telephone"><a ng-href="tel:{{agt.telephone}}"><i class="fa fa-mobile" aria-hidden="true"></i> {{agt.telephone}}</a></li>
+            <li ng-if="agt.email"><a modal template="/presentation/Forms/contact.html"><i class="fa fa-envelope" aria-hidden="true"></i> Email</a></li>
+          </ul>
+        </div>
+        <div class="detail-contact-form">
+          <ng-include src="'/presentation/Forms/contact.html'"></ng-include>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

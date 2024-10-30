@@ -1,0 +1,10 @@
+<span ng-if="item.priceLow" class="label label-real-estate"><i class="fa fa-usd"></i> {{item.priceLow | number}}<ng ng-if="item.priceHigh"> - {{item.priceHigh | number}}</ng></span>
+<span ng-if="item.sqftLow" class="label label-real-estate">{{item.sqftLow | number}}<ng ng-if="item.sqftHigh"> - {{item.sqftHigh | number}} </ng><i class="fa fa-arrows-v"></i></span>
+
+<span ng-if="item.price" class="label label-real-estate"><i class="fa fa-usd"></i> {{item.price | number}}</span>
+<span ng-if="item.sqft" class="label label-real-estate">{{item.sqft | number}} <i class="fa fa-arrows-v"></i></span>
+<span ng-if="!item.sqft && item.lotSize && item.lotSize < 43560" class="label label-real-estate">{{item.lotSize | number}} <i class="fa fa-arrows-v"></i></span>
+<span ng-if="!item.sqft && item.lotSize >= 43560" class="label label-real-estate">{{item.lotSize/43560 | number}} Acres</span>
+<span ng-if="item.beds" class="label label-real-estate">{{item.beds}} <i class="fa fa-bed"></i></span>
+<span ng-if="item.bathsFull" class="label label-real-estate">{{item.bathsFull}}<ng ng-if="item.bathsHalf"> / {{item.bathsHalf}}</ng> <i class="fa"><img ng-src="{{BUILDERCLOUD.PURL + '/bath.png' | thumbnail:11:100:false:true}}"></i></span>
+<span ng-if="item.area" class="label label-real-estate">{{item.area}}</span>

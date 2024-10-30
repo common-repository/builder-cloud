@@ -1,0 +1,42 @@
+<section>
+  <div class="container">
+    <div class="card-sorts">
+      <div uib-dropdown class="filter-label" ng-init="min_beds = '0'">Bedroooms: <a ng-if="min_beds == '0'" uib-dropdown-toggle class="filter-select">All <i class="fa fa-caret-down" aria-hidden="true"></i></a> <a ng-if="min_beds != '0'" uib-dropdown-toggle class="filter-select">{{min_beds}}+</a>
+        <ul uib-dropdown-menu>
+          <li ng-click="min_beds = '0'"><a>All</a></li>
+          <li ng-click="min_beds = 3"><a>3+</a></li>
+          <li ng-click="min_beds = 4"><a>4+</a></li>
+          <li ng-click="min_beds = 5"><a>5+</a></li>
+        </ul>
+      </div>
+      <div uib-dropdown class="filter-label" ng-init="min_baths = '0'">Bathroooms: <a ng-if="min_baths == '0'" uib-dropdown-toggle class="filter-select">All <i class="fa fa-caret-down" aria-hidden="true"></i></a> <a ng-if="min_baths != '0'" uib-dropdown-toggle class="filter-select">{{min_baths}}+</a>
+        <ul uib-dropdown-menu>
+          <li ng-click="min_baths = '0'"><a>All</a></li>
+          <li ng-click="min_baths = 2"><a>2+</a></li>
+          <li ng-click="min_baths = 3"><a>3+</a></li>
+          <li ng-click="min_baths = 4"><a>4+</a></li>
+        </ul>
+      </div>
+      <div uib-dropdown class="filter-label" ng-init="order_field = 'address.streetAddress'">
+        Sort:
+        <a ng-if="order_field == 'address.streetAddress'" uib-dropdown-toggle class="filter-select">Address <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+        <a ng-if="order_field == 'price'" uib-dropdown-toggle class="filter-select">Price <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+        <a ng-if="order_field == '-sqft'" uib-dropdown-toggle class="filter-select">SqFt <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+        <ul uib-dropdown-menu>
+          <li ng-click="order_field = 'address.streetAddress'"><a>Address</a></li>
+          <li ng-click="order_field = 'price'"><a>Price</a></li>
+          <li ng-click="order_field = '-sqft'"><a>SqFt</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row homes">
+      <ul class="list-unstyled">
+        <li  title="{{home.photos[0].title}}" class="result" ng-repeat="home in invFiltered = (homes | filter:urlFilter) | orderBy:order_field" ng-if="home.beds >= min_beds && (home.bathsFull >= min_baths || min_baths == '0')">
+          <home-card home="home" class="horizontal" />
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>

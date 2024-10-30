@@ -1,0 +1,9 @@
+<div class="blog-card">
+  <div class="media" ng-style="{'background-image':'url('+blog.logo.contentUrl+')'}"></div>
+  <div class="content">
+    <!--<div class="blog-date-tag"> <span class="blog-date-tag-day">{{blog.date|date:'dd'}}</span> <span class="blog-date-tag-month">{{blog.date|date:'MMM'}}</span> <span class="blog-date-tag-arrow"></span> </div>-->
+    <h4 ng-bind-html="blog.title"></h4>
+    <h5>{{blog.date|date:'MMMM d yyyy'}}</h5>
+    <p ng-bind-html="blog.textbody|characters:200"></p> <a class="btn" href ui-sref="blogpost({blog_id:blog.uniqueName})">Read Full Post...</a>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<section class="page-template horizontal-card">
+  <div class="container">
+    <!--
+    <div class="blog-sidebar">
+      <h5>Categories</h5>
+      <ul class="blog-cats">
+        <li>test</li>
+      </ul>
+    </div>-->
+    <div>
+      <div dir-paginate="blog in blogposts | orderBy:'-date' | itemsPerPage:8" total-items="blogposts.totalItems" class="result">
+        <blog-card blog="blog" />
+      </div>
+    </div>
+    <dir-pagination-controls on-page-change="blogposts.pageChanged(newPageNumber)"></dir-pagination-controls>
+  </div>
+</section>

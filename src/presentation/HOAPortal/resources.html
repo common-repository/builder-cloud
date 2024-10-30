@@ -1,0 +1,15 @@
+<div class="row" ng-controller="HoaResourceController as ctrl">
+  <div class="col-md-2">
+    <ng-include src="'/presentation/HOAPortal/menu.html'"></ng-include>
+  </div>
+  <div class="col-md-10">
+    <h3>{{ctrl.resource.title}}</h3>
+    <p ng-bind-html="ctrl.resource.body_copy"></p>
+
+    <ul>
+      <li ng-repeat="attachment in ctrl.resource.attachments">
+        <a ng-href="{{attachment.contentUrl}}" target="_blank">{{attachment.title}}</a>
+      </li>
+    </ul>
+  </div>
+</div>

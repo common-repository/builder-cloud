@@ -1,0 +1,126 @@
+<div class="styled-contact-form">
+  <form name="warrantyForm" ng-controller="ContactController" ng-submit="post($event)">
+    <div ng-show="!submitted" ng-class="{'disabled':disabled}">
+      <div class="form-group"> <label class="required">Name:</label> <input class="form-control" name="name" ng-model="data.name" placeholder="" required minlength="3" maxlength="50">
+        <!--<div ng-if="contactForm.name.$error.required">Name is required.</div>-->
+        <div ng-if="contactForm.name.$error.minlength">Name must be at least three characters long.</div>
+        <div ng-if="contactForm.name.$error.maxlength">Name can not be over 50 characters long.</div>
+      </div>
+      <div class="form-group"> <label class="required">Address: </label> <input class="form-control" name="address" ng-model="data.address" placeholder="" required minlength="3">
+        <!--<div ng-if="contactForm.address.$error.required">Address is required.</div>-->
+        <div ng-if="contactForm.address.$error.minlength">Address must be at least three characters long.</div>
+      </div>
+      <div class="form-group"> <label class="required">City: </label> <input class="form-control" name="city" ng-model="data.city" placeholder="" required minlength="3" maxlength="50">
+        <!--<div ng-if="contactForm.city.$error.required">City is required.</div>-->
+        <div ng-if="contactForm.city.$error.minlength">City must be at least three characters long.</div>
+        <div ng-if="contactForm.city.$error.maxlength">City can not be over 50 characters long.</div>
+      </div>
+      <div class="form-group">
+        <label class="required">State: </label>
+        <select class="form-control" name="state" ng-model="data.state">
+        	<option value="AL">Alabama</option>
+        	<option value="AK">Alaska</option>
+        	<option value="AZ">Arizona</option>
+        	<option value="AR">Arkansas</option>
+        	<option value="CA">California</option>
+        	<option value="CO">Colorado</option>
+        	<option value="CT">Connecticut</option>
+        	<option value="DE">Delaware</option>
+        	<option value="DC">District Of Columbia</option>
+        	<option value="FL">Florida</option>
+        	<option value="GA">Georgia</option>
+        	<option value="HI">Hawaii</option>
+        	<option value="ID">Idaho</option>
+        	<option value="IL">Illinois</option>
+        	<option value="IN">Indiana</option>
+        	<option value="IA">Iowa</option>
+        	<option value="KS">Kansas</option>
+        	<option value="KY">Kentucky</option>
+        	<option value="LA">Louisiana</option>
+        	<option value="ME">Maine</option>
+        	<option value="MD">Maryland</option>
+        	<option value="MA">Massachusetts</option>
+        	<option value="MI">Michigan</option>
+        	<option value="MN">Minnesota</option>
+        	<option value="MS">Mississippi</option>
+        	<option value="MO">Missouri</option>
+        	<option value="MT">Montana</option>
+        	<option value="NE">Nebraska</option>
+        	<option value="NV">Nevada</option>
+        	<option value="NH">New Hampshire</option>
+        	<option value="NJ">New Jersey</option>
+        	<option value="NM">New Mexico</option>
+        	<option value="NY">New York</option>
+        	<option value="NC">North Carolina</option>
+        	<option value="ND">North Dakota</option>
+        	<option value="OH">Ohio</option>
+        	<option value="OK">Oklahoma</option>
+        	<option value="OR">Oregon</option>
+        	<option value="PA">Pennsylvania</option>
+        	<option value="RI">Rhode Island</option>
+        	<option value="SC">South Carolina</option>
+        	<option value="SD">South Dakota</option>
+        	<option value="TN">Tennessee</option>
+        	<option value="TX">Texas</option>
+        	<option value="UT">Utah</option>
+        	<option value="VT">Vermont</option>
+        	<option value="VA">Virginia</option>
+        	<option value="WA">Washington</option>
+        	<option value="WV">West Virginia</option>
+        	<option value="WI">Wisconsin</option>
+        	<option value="WY">Wyoming</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="required">Zip: </label>
+        <input class="form-control" name="zip" ng-model="data.zip" placeholder="" required minlength="5" maxlength="5">
+        <!--<div ng-if="contactForm.firstName.$error.required">Name is required.</div>-->
+        <div ng-if="contactForm.zip.$error.minlength">Zip must be at least five characters long.</div>
+        <div ng-if="contactForm.zip.$error.maxlength">Zip can not be over five characters long.</div>
+      </div>
+      <div class="form-group"> <label class="required">Date Closed: </label> <input class="form-control" name="dateClosed" ng-model="data.dateClosed" placeholder="" required> </div>
+      <div class="form-group"> <label class="required">Email Address: </label> <input class="form-control" name="email" type="email" ng-model="data.email" placeholder="" required>
+        <!--<div ng-if="contactForm.email.$error.required">Email is required.</div>-->
+        <div ng-if="contactForm.email.$error.email">Must be a valid email address.</div>
+      </div>
+      <div class="form-group"> <label class="required">Phone: </label> <input class="form-control" name="phone" ng-model="data.phone" placeholder="" required> </div>
+      <div class="form-group blockit">
+        <label class="required">Please describe warranty work to be performed. Be sure to reference the page from your warranty book: </label>
+        <textarea class="form-control" name="comments" ng-model="data.comments" placeholder="" required></textarea>
+      </div>
+      <div class="form-group">
+        <label class="">Photos</label>
+
+        <div class="file-selection">
+          <div>
+            <p ng-if="data.attachment.type.substring(0,5) != 'image'">{{data.attachment.name}}</p>
+            <img ng-if="data.attachment.type.substring(0,5) == 'image'" ng-src="{{data.attachment | ngfDataUrl}}" />
+          </div>
+          <div ngf-drop ngf-select ng-model="data.attachment" class="drop-box" ngf-drag-over-class="'dragover'"
+            ngf-multiple="false" ngf-allow-dir="true" accept="image/*,application/pdf" ngf-pattern="'image/*,application/pdf'">
+            Drop image or pdf here or click to upload.
+          </div>
+        </div>
+
+        <div class="file-selection">
+          <div ng-repeat="attachment in data.attachments">
+            <p ng-if="attachment.type.substring(0,5) != 'image'">{{attachment.name}}</p>
+            <img ng-if="attachment.type.substring(0,5) == 'image'" ng-src="{{attachment | ngfDataUrl}}" />
+          </div>
+          <div ngf-drop ngf-select ng-model="data.attachments" class="drop-box" ngf-drag-over-class="'dragover'"
+            ngf-multiple="true" ngf-allow-dir="true" accept="image/*,application/pdf" ngf-pattern="'image/*,application/pdf'">
+            Drop images or pdfs here or click to upload.
+          </div>
+        </div>
+
+      </div>
+      <div class="form-group blockit" style="margin-left:0;">
+        <button ng-disabled="contactForm.$invalid || disabled" class="btn" type="submit">Submit</button>
+      </div>
+    </div>
+    <div ng-show="submitted" class="submit-message">
+      <h3>Thank You!</h3>
+      <p>Thank you!</p> <a href ng-click="submitted=false;">Click here</a> to send us another request.</div>
+</div>
+</form>
+</div>

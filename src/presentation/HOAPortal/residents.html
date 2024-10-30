@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="row" ng-controller="HoaResidentController as ctrl">
+    <div class="col-md-2">
+      <ng-include src="'/presentation/HOAPortal/menu.html'"></ng-include>
+    </div>
+    <div class="col-md-10">
+      <h3>Resident Listing</h3>
+      <div class="row">
+        <div class="col-md-4 col-md-push-8">
+          <input ng-model="ctrl.search" class="form-control" placeholder="Search"/>
+        </div>
+      </div>
+      <table style="width: 100%;">
+        <thead>
+          <tr>
+            <th ng-click="ctrl.setSort('familyName')">Family Name <i class="fa" ng-class="{'fa-chevron-up': ctrl.isSort('familyName', true), 'fa-chevron-down': ctrl.isSort('familyName', false)}"></i></th>
+            <th ng-click="ctrl.setSort('name')">Name <i class="fa" ng-class="{'fa-chevron-up': ctrl.isSort('name', true), 'fa-chevron-down': ctrl.isSort('name', false)}"></i></th>
+            <th ng-click="ctrl.setSort('address')">Address <i class="fa" ng-class="{'fa-chevron-up': ctrl.isSort('address', true), 'fa-chevron-down': ctrl.isSort('address', false)}"></i></th>
+            <th ng-click="ctrl.setSort('phone')">Phone <i class="fa" ng-class="{'fa-chevron-up': ctrl.isSort('phone', true), 'fa-chevron-down': ctrl.isSort('phone', false)}"></i></th>
+            <th ng-click="ctrl.setSort('email')">Email <i class="fa" ng-class="{'fa-chevron-up': ctrl.isSort('email', true), 'fa-chevron-down': ctrl.isSort('email', false)}"></i></th>
+            <th ng-click="ctrl.setSort('contactType')">Contact Type <i class="fa" ng-class="{'fa-chevron-up': ctrl.isSort('contactType', true), 'fa-chevron-down': ctrl.isSort('contactType', false)}"></i></th>
+            <th ng-click="ctrl.setSort('babysit')">Can Babysit <i class="fa" ng-class="{'fa-chevron-up': ctrl.isSort('babysit', true), 'fa-chevron-down': ctrl.isSort('babysit', false)}"></i></th>
+            <th ng-click="ctrl.setSort('petsit')">Can Petsit <i class="fa" ng-class="{'fa-chevron-up': ctrl.isSort('petsit', true), 'fa-chevron-down': ctrl.isSort('petsit', false)}"></i></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr dir-paginate="resident in ctrl.residents | filter: ctrl.search | orderBy : ctrl.sortField :  ctrl.sortReverse | itemsPerPage : 25" total-items="ctrl.residents.length">
+            <td>{{resident.familyName}}</td>
+            <td>{{resident.name}}</td>
+            <td>{{resident.address}}</td>
+            <td>{{resident.phone | phone}}</td>
+            <td>{{resident.email}}</td>
+            <td>{{resident.contactType}}</td>
+            <td>{{resident.babysit}}</td>
+            <td>{{resident.petsit}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <dir-pagination-controls></dir-pagination-controls>
+    </div>
+  </div>
+</div>

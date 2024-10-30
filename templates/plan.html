@@ -1,0 +1,16 @@
+<div ng-cloak ng-controller="CommonController">
+
+  <div ng-if="plan">
+    <h3>{{plan.name}}</h3>
+    <img ng-if="plan.elevationPhotos[0].contentUrl" style="width:100%;" ng-src="{{plan.elevationPhotos[0].contentUrl|thumbnail}}">
+    <img ng-if="plan.photos[0].contentUrl" style="width:100%;" ng-src="{{plan.photos[0].contentUrl|thumbnail}}">
+    <h4><pills item="plan"></pills></h4>
+    <p>{{plan.description}}</p>
+  </div>
+
+  <div ng-if="!ready" ng-include="BUILDERCLOUD.PURL + '/templates/loading.html'"></div>
+
+  <div ng-if="ready && !plan">
+    Plan Not Found
+  </div>
+</div>

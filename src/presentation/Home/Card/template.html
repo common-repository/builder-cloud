@@ -1,0 +1,19 @@
+<div class="home-card card shiftUpOnHover">
+  <div class="result-media">
+    <a href ui-sref="home({inv_id:home.uniqueName, '#':null})"><img ng-src="{{home.photos[0].contentUrl|thumbnail:368:230:true}}" alt="{{home.photos[0].caption}}" /></a>
+    <div class="overlay-status" ng-if="home.status == 'Sold'"><img ng-src="/images/sold.png" width="67" height="66" /></div>
+  </div>
+  <div class="result-content">
+    <h4>{{home.address.streetAddress}}<br>
+      <span>{{home.address.addressLocality}}, {{home.address.addressRegion}}, {{home.address.postalCode}}</span>
+    </h4>
+    <ul class="list-unstyled">
+      <li ng-if="home.plan.name"><strong>Plan Name:</strong> {{home.plan.name}}</li>
+      <li><strong>Bedrooms:</strong> {{home.beds}}</li>
+      <li><strong>Bathrooms:</strong> {{home.baths}}</li>
+      <li><strong>Square Feet:</strong> {{home.sqft|number}}</li>
+      <li><strong>Price: ${{home.price|number:0}}</strong></li>
+    </ul>
+  </div>
+  <div class="result-cta"><i class="fa fa-heart-o favs" aria-hidden="true"></i></div>
+</div>

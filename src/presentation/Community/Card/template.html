@@ -1,0 +1,21 @@
+<div class="community-card">
+  <div class="result-media">
+    <a href ui-sref="community({com_id:community.uniqueName, '#':null})" title="{{community.logo.title}}">
+      <img ng-src="{{community.logo.contentUrl|thumbnail:550:390:true}}" alt="{{community.logo.caption}}" />
+    </a>
+    <!-- <lightbox template="quicklook" photos="community.photos"></lightbox> -->
+  </div>
+  <div class="result-content">
+    <h4>
+      {{community.name}}<br>
+      <span>
+        {{community.address.streetAddress}} | {{community.address.addressLocality}}, {{community.address.addressRegion}}
+      </span>
+    </h4>
+    <ul class="list-unstyled">
+      <li><strong>Area:</strong> {{community.area.name}}</li>
+      <li><strong>From:</strong> {{community.priceLow | currency:"$":0}}</li>
+    </ul>
+    <a class="btn" href ui-sref="community({com_id:community.uniqueName, '#':null})">View Details</a>
+  </div>
+</div>

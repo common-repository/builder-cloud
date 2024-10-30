@@ -1,0 +1,16 @@
+<footer>
+  <ul class="list-unstyled">
+    <li>{{builder.name}}</li>
+    <li>Phone: {{builder.telephone}} <span ng-if="builder.fax">| Fax: {{builder.fax}}</span></li>
+    <li>{{builder.address.streetAddress}}</li>
+    <li>{{builder.address.addressLocality}}, {{builder.address.addressRegion}} {{builder.address.postalCode}}</li>
+    <li>
+      <ng-include src="'/presentation/Social/template.html'"></ng-include>
+    </li>
+  </ul>
+  <ul class="list-unstyled">
+    <li>&copy;{{date|date:'yyyy'}} {{builder.name}} All Rights Reserved.</li>
+    <li><img src="/images/equal-housing-opportunity-logo.svg" alt="Equal Housing Opportunity" width="50" height="50" /></li>
+    <li><a href="http://www.builderdesigns.com" target="_blank" title="Builder Designs">Builder Designs</a></li>
+  </ul>
+</footer>

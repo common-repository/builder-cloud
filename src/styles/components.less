@@ -1,0 +1,363 @@
+/* results zigzag */
+.results-zigzag {
+	background: white;
+
+	.result-zigzag {
+		overflow: hidden;
+		margin-bottom: 30px;
+		border: 1px solid #ddd;
+
+		.result-media {
+			width: 50%;
+			position: relative;
+			height: 100%;
+			float: right;
+			display: inline;
+			background-size: cover;
+			background-position: center;
+		}
+
+		.result-media:before {
+			content: "";
+			display: block;
+			padding-top: 75%;
+		}
+
+		.result-content {
+			width: 50%;
+			position: relative;
+			height: 100%;
+			float: right;
+			display: inline;
+
+			.takeover {
+				padding: 0 20px;
+			}
+		}
+
+		.result-content:before {
+			content: "";
+			display: block;
+			padding-top: 75%;
+
+			@media (max-width: 550px) {
+				padding-top:0;
+			}
+		}
+	}
+
+	.result-zigzag:nth-child(odd) {
+		.result-media {
+			float: left;
+		}
+
+		.result-content {
+			float: left;
+		}
+	}
+}
+
+
+/* three by carousel */
+
+	.three-by-carousel .left.carousel-control {
+		width: 0%;
+		opacity: 1;
+		color: black;
+		top: 35%;
+		left: 20px;
+	}
+
+	.three-by-carousel .right.carousel-control {
+		width: 0%;
+		opacity: 1;
+		color: black;
+		top: 35%;
+		right: 40px;
+	}
+
+	.three-by-carousel .carousel-control:hover {
+		color: black;
+	}
+
+	.three-by-carousel .carousel-indicators {
+		bottom: -10px;
+	}
+
+
+	.three-by-carousel .carousel-indicators li {
+		border: 1px solid #797979;
+		background-color: rgb(0, 0, 0);
+	}
+
+
+	/* favorites */
+
+	.favorite-group {
+
+		.favorites {
+
+			.fav-type-title {
+				font:300 24px/1.2 @font-family-sans-serif;
+				color:@color1;
+				display:block;
+				border-bottom:1px solid whitesmoke;
+				padding:0 0 10px 0;
+				margin:0;
+			}
+
+			.result {
+				display:block;
+				width:100%;
+				border-bottom:1px solid whitesmoke;
+				padding:3px 0;
+				font-size:0;
+
+				.result-media {
+					width:33.33333333%;
+					display:inline-block;
+					vertical-align: top;
+
+					img {
+						max-width:100%;
+						height:auto;
+					}
+				}
+
+				.result-content {
+					width:66.66666666%;
+					display:inline-block;
+					vertical-align: top;
+					font:400 16px/1.2 @font-family-sans-serif;
+					padding:0 0 0 10px;
+
+					h4 {
+						font:300 20px/1.2 @font-family-sans-serif;
+						color:#333;
+						margin:0;
+					}
+
+					ul {
+						.list-unstyled;
+						margin:0 0 5px 0;
+
+						li {
+							display:inline-block;
+							padding: 5px;
+						}
+					}
+
+					.btn {
+						font-size: 14px;
+						padding:8px;
+
+					}
+				}
+			}
+		}
+	}
+
+	a.fav-notify {
+		width:35px;
+		height:35px;
+		color:white;
+		font:600 14px/32px @font-family-sans-serif;
+		background:@color2 url('/images/fav-notify.jpg');
+		background-repeat:no-repeat;
+		background-position: center;
+    background-size: 133%;
+		display: inline-block;
+		vertical-align: top;
+		text-align: center;
+		background-position: 50% -5px;
+	}
+
+	/* Rating Stars */
+	.stars-box {
+	  display: inline-block;
+	  position: relative;
+	  width: 85px;
+	  height: 15px;
+
+	  .stars{
+	    display: inline-block;
+	    position: relative;
+	    height: 100%;
+	    background-size: cover;
+	    background-image: url('/images/icons/stars.png');
+
+	  }
+
+	  .stars-1 {
+	    position: relative;
+	    width: 10%;
+	  }
+
+	  .stars-2 {
+	    width: 20%;
+	  }
+
+	  .stars-3 {
+	    width: 30%;
+	  }
+
+	  .stars-4 {
+	    width: 40%;
+	  }
+
+	  .stars-5 {
+	    width: 50%;
+	  }
+
+	  .stars-6 {
+	    width: 60%;
+	  }
+
+	  .stars-7 {
+	    width: 70%;
+	  }
+
+	  .stars-8 {
+	    width: 80%;
+	  }
+
+	  .stars-9 {
+	    width: 90%;
+	  }
+
+	  .stars-10 {
+	    width: 100%;
+	  }
+	}
+
+/* Cluster Dots */
+
+.marker-cluster-small {
+	background-color: rgba(19, 78, 146, 0.6);
+	}
+.marker-cluster-small div {
+	background-color: rgba(19, 78, 146, 0.6);
+	}
+
+.marker-cluster-medium {
+	background-color: rgba(19, 78, 146, 0.6);
+	}
+.marker-cluster-medium div {
+	background-color: rgba(19, 78, 146, 0.6);
+	}
+
+.marker-cluster-large {
+	background-color: rgba(19, 78, 146, 0.6);
+	}
+.marker-cluster-large div {
+	background-color: rgba(19, 78, 146, 0.6);
+	}
+
+	/* IE 6-8 fallback colors */
+.leaflet-oldie .marker-cluster-small {
+	background-color: rgb(181, 226, 140);
+	}
+.leaflet-oldie .marker-cluster-small div {
+	background-color: rgb(110, 204, 57);
+	}
+
+.leaflet-oldie .marker-cluster-medium {
+	background-color: rgb(241, 211, 87);
+	}
+.leaflet-oldie .marker-cluster-medium div {
+	background-color: rgb(240, 194, 12);
+	}
+
+.leaflet-oldie .marker-cluster-large {
+	background-color: rgb(253, 156, 115);
+	}
+.leaflet-oldie .marker-cluster-large div {
+	background-color: rgb(241, 128, 23);
+}
+
+.marker-cluster {
+	background-clip: padding-box;
+	border-radius: 20px;
+	}
+.marker-cluster div {
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	margin-top: 5px;
+
+	text-align: center;
+	border-radius: 15px;
+	font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+	color:white;
+	}
+.marker-cluster span {
+	line-height: 30px;
+	}
+
+.leaflet-cluster-anim .leaflet-marker-icon, .leaflet-cluster-anim .leaflet-marker-shadow {
+	-webkit-transition: -webkit-transform 0.3s ease-out, opacity 0.3s ease-in;
+	-moz-transition: -moz-transform 0.3s ease-out, opacity 0.3s ease-in;
+	-o-transition: -o-transform 0.3s ease-out, opacity 0.3s ease-in;
+	transition: transform 0.3s ease-out, opacity 0.3s ease-in;
+}
+
+.leaflet-cluster-spider-leg {
+	/* stroke-dashoffset (duration and function) should match with leaflet-marker-icon transform in order to track it exactly */
+	-webkit-transition: -webkit-stroke-dashoffset 0.3s ease-out, -webkit-stroke-opacity 0.3s ease-in;
+	-moz-transition: -moz-stroke-dashoffset 0.3s ease-out, -moz-stroke-opacity 0.3s ease-in;
+	-o-transition: -o-stroke-dashoffset 0.3s ease-out, -o-stroke-opacity 0.3s ease-in;
+	transition: stroke-dashoffset 0.3s ease-out, stroke-opacity 0.3s ease-in;
+}
+
+/* Autocomplete */
+
+.autocomplete{
+  display: inline-block;
+  position: relative;
+}
+
+.autocomplete input{
+  width: 270px;
+  padding: 4px;
+  color:#333;
+}
+
+.autocomplete span{
+  font-weight: bolder;
+}
+
+.autocomplete ul{
+  padding: 0px;
+  position: absolute;
+  left: 0;
+  width: 270px;
+  bottom:auto;
+  border-left: 1px solid whitesmoke;
+  border-right: 1px solid whitesmoke;
+  border-bottom: 1px solid whitesmoke;
+  border-top: 1px solid whitesmoke;
+  z-index: 1;
+}
+
+.autocomplete li{
+  text-align: left;
+  list-style:none;
+  width: 100%;
+  padding:0.4em;
+  background-color: #fff;
+}
+
+.autocomplete li.active{
+  width: 100%;
+  background-color: whitesmoke;
+  cursor:pointer;
+}
+
+.autocomplete .highlight {
+  background-color: #E2E2E2;
+}
+
+.autocomplete li.active .highlight {
+  background: #666;
+  color: #fff;
+}

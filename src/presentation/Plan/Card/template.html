@@ -1,0 +1,16 @@
+<div class="plan-card card brianCard">
+  <div class="result-media">
+    <a href ui-sref="plan({plan_id:plan.uniqueName, '#':null})"><img ng-src="{{plan.photos[0].contentUrl|thumbnail:368:230:true}}" alt="{{plan.photos[0].caption}}" /></a>
+  </div>
+  <div class="result-content">
+    <h4>{{plan.name}} {{photos.length}}</h4>
+    <ul class="list-unstyled">
+      <li ng-if="plan.plan.name"><strong>Plan Name:</strong> {{plan.plan.name}}</li>
+      <li><strong>Bedrooms:</strong> {{plan.beds}}</li>
+      <li><strong>Bathrooms:</strong> {{plan.baths}}</li>
+      <li><strong>Square Feet:</strong> {{plan.sqft|number}}</li>
+      <li><strong>Price: ${{plan.price|number:0}}</strong></li>
+    </ul>
+  </div>
+  <div class="result-cta"><i class="fa fa-heart-o favs" aria-hidden="true"></i></div>
+</div>

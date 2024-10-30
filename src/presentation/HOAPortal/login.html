@@ -1,0 +1,35 @@
+<h2>Homeowner Login</h2>
+
+<div class="row" ng-controller="HoaLoginController as ctrl">
+  <div class="col-md-8">
+    Login Copy
+    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt officiis aliquid voluptatibus laborum nisi, voluptatum nostrum perferendis magnam necessitatibus ut quae at vero error labore temporibus! Alias, magnam, eum! Excepturi.</div>
+    <div>Officia laboriosam, cupiditate magnam suscipit ducimus temporibus distinctio possimus iusto corporis voluptatibus autem a at inventore maxime aspernatur velit, quaerat, voluptates eaque est magni. Enim beatae necessitatibus modi laborum, odio?</div>
+  </div>
+  <div class="col-md-2">
+    <form name="loginForm" ng-submit="ctrl.login()">
+      <label>
+        Username (email)
+        <input class="form-control" type="text" ng-model="ctrl.email" name="email" />
+      </label>
+      <label>
+        Password
+        <input class="form-control" type="password" name="password" ng-model="ctrl.password"/>
+      </label>
+      <span class="text-danger" ng-if="ctrl.failure">{{ctrl.failure}}</span>
+      <input type="submit" value="Log In" class="btn btn-primary" />
+      <a ui-sref="hoa-register" class="btn btn-primary">Register</a>
+    </form>
+
+    <form name="resetPassword">
+      Lost your password? Enter your email below to send your password to your inbox.
+      <label>
+        Email
+        <input class="form-control" type="text" ng-model="ctrl.resetEmail" name="email" placeholder="Email"/>
+        <button class="btn btn-primary" type="submit" ng-click="ctrl.passwordReset()">Reset Password</button>
+        <span class="message" ng-if="ctrl.resetSuccess">{{ctrl.resetSuccess}}</span>
+        <span class="text-danger" ng-if="ctrl.resetFailure">{{ctrl.resetFailure}}</span>
+      </label>
+    </form>
+  </div>
+</div>

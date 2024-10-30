@@ -1,0 +1,50 @@
+<div class="homepage">
+  <section class="home-carousel-wrapper">
+    <div uib-carousel active="active" interval="5000">
+      <div uib-slide ng-repeat="item in pages.home_page.carousel track by $index" index="$index" ng-style="{'background-image':'url('+$filter('thumbnail')(item.image.contentUrl,1650,1650)+')'}">
+        <div class="takeover">
+          <div class="centering-table">
+            <div class="centering-table-cell">
+              <div class="carousel-content">
+                <h2 class="animated fadeInUp delay-2 quote" ng-bind-html="item.headline"></h2>
+                <h3 class="animated fadeInUp delay-2" ng-bind-html="item.subheadline"></h3> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="home-content" ng-repeat="item in pages.home_page.home_content">
+    <div class="container">
+      <h1>{{item.headline}}</h1>
+      <h2>{{item.subheadline}}</h2>
+      <p ng-bind-html="item.description"></p> <a class="btn" href ui-sref="{{item.link_url}}">{{item.link_text}}</a> </div>
+  </section>
+  <section class="cta">
+    <div class="container">
+      <div class="row">
+        <div class="result" ng-repeat="item in pages.home_page.cta">
+          <div class="result-media" ng-style="{'background-image':'url('+$filter('thumbnail')(item.image.contentUrl,1650,1650)+')'}"></div>
+          <div class="result-content">
+            <h2>{{item.headline}}</h2>
+            <h4>{{item.subheadline}}</h4> <a class="btn" href ui-sref="{{item.link_url}}">{{item.link_text}}</a> </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="widget-blog">
+    <div class="container">
+      <div class="row">
+        <h2>Latest News</h2>
+        <div ng-repeat="blog in blogposts | orderBy:'-date' | limitTo:3" class="result">
+          <div class="result-media">
+            <img ng-src="{{blog.logo.contentUrl|thumbnail:584:438:true}}" />
+          </div>
+          <div class="result-content">
+            <h4 ng-bind-html="blog.title"></h4> <span class="blog-date-tag-month">{{blog.date|date:'MMM'}}</span> <span class="blog-date-tag-day">{{blog.date|date:'dd'}}</span>
+            <p ng-bind-html="blog.textbody|characters:200"></p> <a class="btn" href ui-sref="blogpost({blog_id:blog.uniqueName})">Learn More</a> </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

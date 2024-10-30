@@ -1,0 +1,12 @@
+<h1>{{page.meta.header}}</h1>
+
+<h2>Client Page</h2>
+
+Content:
+<div ng-bind-html="page.content"></div>
+
+<div style="padding-bottom:90px;">
+  <img style="display:inline-block; position:relative; margin-right:-25px;
+    margin-bottom:-45px; z-index:{{1000-$index}};" ng-repeat="lego in page.legos"
+    ng-src="/images/legos/{{lego.color}}.png" />
+</div>

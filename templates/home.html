@@ -1,0 +1,26 @@
+<div ng-cloak ng-controller="CommonController">
+
+  <div ng-if="home">
+    <h4>{{home.address.streetAddress}}, {{home.address.addressLocality}}, {{home.address.addressRegion}} {{home.address.postalCode}}</h4>
+
+    <img ng-init="home.thePhoto = home.photos[0]" style="width:100%;" ng-src="{{home.thePhoto.contentUrl|thumbnail}}">
+    <div ng-if="home.photos.length > 1">
+      <a ng-repeat="photo in home.photos" href ng-click="home.thePhoto = photo">
+        <img ng-src="{{photo.contentUrl|thumbnail:240:180:true}}">
+      </a>
+    </div>
+    <h4><pills item="home"></pills></h4>
+    <p>{{home.description}}</p>
+
+    <bd-map id="home" style="height:400px;" markers="home" markers-icon="map_pin_red.png" popup-template="homePopup.html"></bd-map>
+    <script type="text/ng-template" id="homePopup.html">
+      <a target="_blank" href="http://maps.google.com/?q={{geoIndexed[1]}},{{geoIndexed[0]}}"></a>
+    </script>
+  </div>
+
+  <div ng-if="!ready" ng-include="BUILDERCLOUD.PURL + '/templates/loading.html'"></div>
+
+  <div ng-if="ready && !home">
+    Home Not Found
+  </div>
+</div>

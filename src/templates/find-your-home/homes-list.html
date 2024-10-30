@@ -1,0 +1,50 @@
+<section class="page-template red-hot-results">
+  <div class="container">
+    <div class="row">
+      <div class="card-sorts">
+        <div uib-dropdown class="filter-label" ng-init="min_beds = '0'">Bedroooms: <a ng-if="min_beds == '0'" uib-dropdown-toggle class="filter-select">All</a> <a ng-if="min_beds != '0'" uib-dropdown-toggle class="filter-select">{{min_beds}}+</a>
+          <ul uib-dropdown-menu>
+            <li ng-click="min_beds = '0'"><a>All</a></li>
+            <li ng-click="min_beds = 3"><a>3+</a></li>
+            <li ng-click="min_beds = 4"><a>4+</a></li>
+            <li ng-click="min_beds = 5"><a>5+</a></li>
+          </ul>
+        </div>
+        <div uib-dropdown class="filter-label" ng-init="min_baths = '0'">Bathroooms: <a ng-if="min_baths == '0'" uib-dropdown-toggle class="filter-select">All</a> <a ng-if="min_baths != '0'" uib-dropdown-toggle class="filter-select">{{min_baths}}+</a>
+          <ul uib-dropdown-menu>
+            <li ng-click="min_baths = '0'"><a>All</a></li>
+            <li ng-click="min_baths = 2"><a>2+</a></li>
+            <li ng-click="min_baths = 3"><a>3+</a></li>
+            <li ng-click="min_baths = 4"><a>4+</a></li>
+          </ul>
+        </div>
+        <div uib-dropdown class="filter-label" ng-init="order_field = 'address.streetAddress'">Sort: <a ng-if="order_field == 'address.streetAddress'" uib-dropdown-toggle class="filter-select">Address</a> <a ng-if="order_field == 'price'" uib-dropdown-toggle class="filter-select">Price</a> <a ng-if="order_field == '-sqft'" uib-dropdown-toggle
+              class="filter-select">SqFt</a>
+          <ul uib-dropdown-menu>
+            <li ng-click="order_field = 'address.streetAddress'"><a>Address</a></li>
+            <li ng-click="order_field = 'price'"><a>Price</a></li>
+            <li ng-click="order_field = '-sqft'"><a>SqFt</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="result-card">
+        <a href ui-sref="home({inv_id:home.uniqueName, '#':null})" title="{{home.photos[0].title}}" class="result" ng-repeat="home in invFiltered = (homes | filter:urlFilter | filter:websiteService.redHotFilter) | orderBy:order_field" ng-if="home.beds >= min_beds && (home.bathsFull >= min_baths || min_baths == '0')" target="_blank">
+          <div class="result-media"> <img ng-src="{{home.photos[0].contentUrl|thumbnail:368:230:true}}" alt="{{home.photos[0].caption}}" />
+            <div class="overlay-status" ng-if="home.status == 'Sold'"><img ng-src="/images/sold.png" width="67" height="66" /></div>
+          </div>
+          <div class="result-content">
+            <h4>{{home.address.streetAddress}}<span>{{home.address.addressLocality}}, {{home.address.addressRegion}}, {{home.address.postalCode}}</span>
+            <span ng-if="home.plan.name"><strong>Plan Name:</strong> {{home.plan.name}}</span>
+          </h4>
+            <ul class="list-unstyled">
+              <li><i class="fa fa-bed" aria-hidden="true"></i> {{home.beds}}</li>
+              <li><i class="fa fa-bath" aria-hidden="true"></i> {{home.baths}}</li>
+              <li><i class="fa fa-columns" aria-hidden="true"></i> {{home.sqft|number}}</li>
+            </ul>
+          </div>
+          <div class="result-cta">${{home.price|number:0}} <i class="fa fa-heart-o favs" aria-hidden="true"></i></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

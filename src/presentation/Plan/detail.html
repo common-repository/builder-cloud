@@ -1,0 +1,103 @@
+<section class="detail-header">
+  <div class="detail-header-media">
+    <div uib-carousel active="carouselactiveslide" interval="5000" template-url="/presentation/Carousel/ry.html">
+      <div uib-slide ng-repeat="slide in plan.photos track by $index" index="$index" ng-style="{'background-image':'url(&quot;'+slide.contentUrl+'&quot;)'}">
+        <!--  <img ng-src="{{slide.contentUrl|thumbnail:640:400:true}}" />  --></div>
+    </div>
+    <lightbox ng-if="plan.photos.length > 1" photos="plan.photos" template="counter"></lightbox>
+    <lightbox ng-if="plan.photos.length == 1" photos="plan.photos" template="counterone"></lightbox>
+  </div>
+  <div class="detail-header-content">
+    <div class="takeover">
+      <h1 ng-bind-html="seo.h1"></h1>
+      <div class="fav-wrap">
+        <favorite sref="['plan', {plan_id: plan.uniqueName}]" type="Plan" title="{{plan.name}}" lii="Beds: {{plan.beds}}" liii="Baths: {{plan.baths}}" image="{{plan.photos[0].contentUrl}}"></favorite>
+      </div>
+
+      <ul class="stats-2col borders">
+        <li ng-if="plan.price"><strong>BASE PRICE:</strong> ${{plan.price|number:0}}</li>
+        <li ng-if="plan.beds"><i class="fa fa-bed" aria-hidden="true"></i> {{plan.beds}}</li>
+        <li ng-if="plan.baths"><i class="fa fa-bath" aria-hidden="true"></i> {{plan.baths}}</li>
+      </ul>
+      <ul class="stats-2col borders">
+        <li ng-if="plan.sqft"><i class="fa fa-columns" aria-hidden="true"></i> {{plan.sqft|number}}</li>
+        <li ng-if="plan.garages"><i class="fa fa-car" aria-hidden="true"></i> {{plan.garages}}</li>
+      </ul>
+      <ul class="list-unstyled cta-btn-set">
+        <li><a href ui-sref="community({com_id:community.uniqueName})" class="btn">Community Page</a></li>
+        <li> <a href="#" modal template="/presentation/Forms/contact.html" class="btn btn-brand">Request Info</a> </li>
+        <li ng-if="area.dsld_mortgage"> <a href="http://www.dsldmortgage.com" class="btn" target="_blank">Mortgage Info</a> </li>
+        <li ng-if="plan.plan_pdf"> <a href="{{plan.plan_pdf.contentUrl}}" class="btn" target="_blank">Floor Plan PDF</a> </li>
+      </ul>
+      <div class="detail-next">
+        <div ng-repeat="mod in community.plans | orderBy:'price'" class="detail-next-btn-wrap">
+          <div ng-if="community.currentPlanIndex == $index + 1" class="previous-wrapper">
+            <a href ui-sref="plan({plan_id:mod.uniqueName})" class="btn">
+              <strong><i class="fa fa-arrow-left" aria-hidden="true"></i> Previous Plan</strong><!--{{mod.name}}--></a>
+          </div>
+          <div ng-if="mod._id == plan._id" ng-init="community.currentPlanIndex = $index"
+              style="display:none;">
+            <!--current-->
+          </div>
+          <div ng-if="community.currentPlanIndex == ($index - 1)" class="next-wrapper">
+            <a href ui-sref="plan({plan_id:mod.uniqueName})" class="btn">
+              <strong>Next Plan <i class="fa fa-arrow-right" aria-hidden="true"></i></strong><!--{{mod.name}}--></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="detail-content">
+  <div class="container">
+    <div class="row">
+      <div class="detail-main-content">
+        <div class="detail-cmod-map">
+          <h5 class="detail-section-headline">Also available in these communities</h5>
+          <bd-map style="display:block; width:100%; height:400px; border:3px solid #d9d9d9;" id="planComsMap" markers="plan.communities" max-zoom="13" marker-icon="/images/map-markers/map-pin-green.png" popup-template="cmodPopup.html" marker-width="31"
+              marker-height="46"> </bd-map>
+          <script type="text/ng-template" id="cmodPopup.html"> <img src="{{community.logo.contentUrl|thumbnail:170:113:true}}" style="width:170px; height:113px;">
+            <div class="map-popup-text">
+              <h4>{{community.name}}</h4>
+              <ul class="list-unstyled">
+                <li ng-if="communityModelProperties.price" class="hidden-sm hidden-xs">Plan Base Price: {{communityModelProperties.price|currency:$:0}}</li>
+                <li ng-if="community.status" class="hidden-sm hidden-xs"><strong>Status: </strong>{{community.status|rename}}</li>
+                <li><a href="/communities/{{community.uniqueName}}" class="btn">View Details</a></li>
+              </ul>
+            </div>
+          </script>
+        </div>
+      </div>
+      <div class="detail-sidebar-content">
+        <div class="detail-floorplans-section">
+          <h5 class="detail-sidebar-header">floorplan</h5>
+          <lightbox photos="plan.floorplanPhotos" template="floorplanicon"></lightbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="detail-contact">
+  <div class="container">
+    <div class="row">
+      <h4 class="detail-section-headline">Get in touch with us</h4>
+      <div class="detail-contact-wrapper">
+        <div class="detail-contact-content">
+          <div class="detail-contact-content-heading">
+            <h3 class="detail-sidebar-header">Agent Info</h3> </div>
+          <ul ng-repeat="agt in community.agents track by $index" class="list-unstyled">
+            <li ng-if="!agt.mortgage_loan_originator && !agt.senior_mortgage_loan_originator && !agt.sales_agent"><strong class="blockit">Builder Sales Representative:</strong> {{agt.name}}</li>
+            <li ng-if="agt.sales_agent"><strong class="blockit">Sales Agent:</strong> {{agt.name}}</li>
+            <li ng-if="agt.mortgage_loan_originator"><strong class="blockit">Mortgage Loan Originator:</strong> {{agt.name}}</li>
+            <li ng-if="agt.senior_mortgage_loan_originator"><strong class="blockit">Sr. Mortgage Loan Originator:</strong> {{agt.name}}</li>
+            <li ng-if="agt.telephone"><a ng-href="tel:{{agt.telephone}}"><i class="fa fa-mobile" aria-hidden="true"></i> {{agt.telephone}}</a></li>
+            <li ng-if="agt.email"><a modal template="/presentation/Forms/contact.html"><i class="fa fa-envelope" aria-hidden="true"></i> Email</a></li>
+          </ul>
+        </div>
+        <div class="detail-contact-form">
+          <ng-include src="'/presentation/Forms/contact.html'"></ng-include>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

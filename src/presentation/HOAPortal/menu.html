@@ -1,0 +1,19 @@
+<div ng-controller="HoaMenuController as ctrl">
+  <div class="status">
+    You are logged in as {{ctrl.user.name}}
+    <a href="" ng-click="ctrl.logout()">Logout</a>
+    <a ui-sref="hoa-my-account">Edit My Account</a>
+  </div>
+
+  <ul>
+    <li ng-repeat="resource in ctrl.resources">
+      <a ui-sref="hoa-page({page: resource.url})">{{resource.title}}</a>
+    </li>
+    <li>
+      <a ui-sref="hoa-residents">Residents Directory</a>
+    </li>
+    <li>
+      <a ui-sref="hoa-contact">Contact Management</a>
+    </li>
+  </ul>
+</div>

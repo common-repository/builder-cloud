@@ -1,0 +1,122 @@
+<!doctype html>
+<html ng-app="app" ng-controller="CommonController" ng-cloak>
+
+  <head>
+    <base href="/">
+    <meta charset="utf-8">
+    <title ng-bind-html="seo.title"></title>
+    <meta name="{{'description'}}" content="{{seo.description}}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="fragment" content="!" />
+    <meta name="msvalidate.01" content="C05CFA196A26897F0DE760768DE8215D" />
+
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.9/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.9/angular-animate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/5.7.8/css/jquery.mmenu.all.css" />
+
+  </head>
+
+  <body ng-cloak class="state-{{$state.current.name|machine}} state-{{$stateParams|machine}}">
+    <div id="page">
+      <ng-include src="'/presentation/Header/Global/template.html'"></ng-include>
+      <main>
+        <ui-view />
+      </main>
+      <ng-include src="'/presentation/Footer/template.html'"></ng-include>
+    </div>
+
+    <noscript>
+      <div style="display:inline;">
+      <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/972356987/?guid=ON&amp;script=0"/>
+      </div>
+    </noscript>
+
+    <!--Lasso-->
+    <script type="text/javascript">
+      var _ldstJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
+      _ldstJsHost += "app.lassocrm.com";
+      document.write(unescape("%3Cscript src='" + _ldstJsHost + "/analytics.js' type='text/javascript'%3E%3C/script%3E"));
+
+    </script>
+    <script type="text/javascript">
+      var LassoCRM = LassoCRM || {};
+      (function(ns) {
+        ns.tracker = new LassoAnalytics('LAS-908729-01');
+      })(LassoCRM);
+      try {
+        LassoCRM.tracker.setTrackingDomain(_ldstJsHost);
+        LassoCRM.tracker.init();
+        LassoCRM.tracker.track();
+      } catch (error) {}
+
+    </script>
+    <!--Lasso-->
+    <!-- clicky -->
+    <script type="text/javascript">
+      var bdStats_site_ids = bdStats_site_ids || [];
+      bdStats_site_ids.push(100973901);
+      (function() {
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = '//hello.staticstuff.net/w/bdStats.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(s);
+      })();
+
+    </script>
+    <!-- clicky -->
+    <!-- Google Code for Remarketing Tag -->
+    <script type="text/javascript">
+      /* <![CDATA[ */
+      var google_conversion_id = 972356987;
+      var google_custom_params = window.google_tag_params;
+      var google_remarketing_only = true;
+      /* ]]> */
+
+    </script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    <!-- USE CURRENT VERSION OF TYPEKIT -->
+    <script src="https://use.typekit.net/pbx4juk.js"></script>
+    <script>
+      try {
+        Typekit.load({
+          async: true
+        });
+      } catch (e) {}
+
+    </script>
+    <!-- USE CURRENT VERSION OF TYPEKIT -->
+    <!-- google analytics -->
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+      ga('create', 'UA-12735995-1', 'auto');
+      ga('require', 'displayfeatures');
+      ga('send', 'pageview');
+
+    </script>
+    <!-- google analytics -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/5.7.8/js/jquery.mmenu.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/5.7.8/wrappers/angular/jquery.mmenu.angular.min.js"></script>
+  </body>
+
+</html>

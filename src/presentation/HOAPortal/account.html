@@ -1,0 +1,17 @@
+<div class="row" ng-controller="HoaAccountController as ctrl">
+  <div class="col-md-2">
+    <ng-include src="'/presentation/HOAPortal/menu.html'"></ng-include>
+  </div>
+  <div class="col-md-10">
+    <div class="account">
+      <h3>My Account</h3>
+      <account-form user="ctrl.user" is-self="true" on-save="ctrl.saveUser(user)" />
+    </div>
+
+    <div class="family_members" ng-if="ctrl.user.hoa_primary_user">
+      <h3>Family Members</h3>
+      <account-form user="member" ng-repeat="member in ctrl.familyMembers" on-delete="ctrl.deleteUser(user)" on-save="ctrl.saveUser(user)"/>
+      <button class="btn btn-primary" ng-click="ctrl.addFamilyMember()">Add Family Member</button>
+    </div>
+  </div>
+</div>

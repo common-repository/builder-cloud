@@ -1,0 +1,39 @@
+<section ng-if="stateArea.state && !area.name" class="area-info">
+  <div class="container">
+    <div class="row">
+      <div class="result-media"> <img ng-src="{{stateArea.photo.contentUrl}}" alt="" /> </div>
+      <div class="result-content">
+        <h4>About {{stateArea.state}}</h4>
+        <p ng-bind-html="stateArea.description"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section ng-if="area.name" class="area-info">
+  <div class="container">
+    <div class="row">
+      <div class="result-media"> <img ng-src="{{area.logo.contentUrl}}" alt="" /> </div>
+      <div class="result-content">
+        <h4>About {{area.name}}</h4>
+        <p ng-bind-html="area.description"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="browse-areas">
+  <div class="container">
+    <div class="row">
+      <h4 ng-if="$stateParams['#'] != 'homes'" ><span>browse our communities in these areas</span></h4>
+      <h4 ng-if="$stateParams['#'] == 'homes'" ><span>browse our quick move-in homes in these areas</span></h4>
+      <ul>
+        <li ng-repeat="com in communities | filter:com_stateFilter | has:'area.name' | unique:'area.name' | orderBy:'area.name'">
+          <a href ui-sref="fyh({com_state:$filter('machine')($filter('stateName')(com.address.addressRegion)), com_area:$filter('machine')(com.area.name)})" class="btn">
+            {{com.area.name}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
